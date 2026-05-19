@@ -188,46 +188,46 @@
   </div>
 
   <!-- 滚动区 -->
-  <div style="flex:1;overflow-y:auto;padding:16px 20px;display:flex;flex-direction:column;gap:12px;">
+  <div style="flex:1;overflow-y:auto;padding:16px 20px;display:flex;flex-direction:column;gap:0;">
 
     <!-- 统计卡片 -->
-    <div style="display:flex;gap:12px;">
+    <div style="display:flex;gap:12px;margin-bottom:12px;">
       <!-- 开口客户 -->
       <div class="stat-card" id="card-0" onclick="filterByCard(0)">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
-          <span style="font-size:12px;color:#666;">开口客户<span class="def-tip" data-tip="进线后主动发起私信沟通的客户">ⓘ</span></span>
+          <span style="font-size:12px;color:#666;">进线客户<span class="def-tip" data-tip="通过私信、评论、表单等任意渠道发起过互动的客户">ⓘ</span></span>
           <span class="stat-badge-green" id="card-badge-0">+12%</span>
         </div>
-        <div style="font-size:28px;font-weight:800;color:#1a1a1a;line-height:1;" id="card-num-0">128</div>
-        <div class="stat-delta-pos" style="margin-top:6px;" id="card-delta-0">较上周增长 15人</div>
+        <div style="font-size:28px;font-weight:800;color:#1a1a1a;line-height:1;" id="card-num-0">512</div>
+        <div class="stat-delta-pos" style="margin-top:6px;" id="card-delta-0">较上周增长 58人</div>
       </div>
-      <!-- 潜在客户 -->
+      <!-- 开口客户 -->
       <div class="stat-card" id="card-1" onclick="filterByCard(1)">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
-          <span style="font-size:12px;color:#666;">潜在客户<span class="def-tip" data-tip="未进线，但关注您或在笔记下评论的客户">ⓘ</span></span>
+          <span style="font-size:12px;color:#666;">开口客户<span class="def-tip" data-tip="进线后主动发起私信沟通的客户">ⓘ</span></span>
           <span class="stat-badge-green" id="card-badge-1">+8%</span>
         </div>
-        <div style="font-size:28px;font-weight:800;color:#1a1a1a;line-height:1;" id="card-num-1">342</div>
-        <div class="stat-delta-pos" style="margin-top:6px;" id="card-delta-1">较上周增长 26人</div>
+        <div style="font-size:28px;font-weight:800;color:#1a1a1a;line-height:1;" id="card-num-1">128</div>
+        <div class="stat-delta-pos" style="margin-top:6px;" id="card-delta-1">较上周增长 15人</div>
       </div>
-      <!-- 留资客户 -->
+      <!-- 潜在客户 -->
       <div class="stat-card" id="card-2" onclick="filterByCard(2)">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
-          <span style="font-size:12px;color:#666;">留资客户<span class="def-tip" data-tip="已完成留资的客户，含有真实联系方式的线索及个微复制、唤端等留资行为">ⓘ</span></span>
+          <span style="font-size:12px;color:#666;">潜在客户<span class="def-tip" data-tip="未进线，但关注您或在笔记下评论的客户">ⓘ</span></span>
           <span class="stat-badge-green" id="card-badge-2">+5%</span>
         </div>
-        <div style="font-size:28px;font-weight:800;color:#1a1a1a;line-height:1;" id="card-num-2">214</div>
-        <div class="stat-delta-pos" style="margin-top:6px;" id="card-delta-2">较上周增长 11人</div>
+        <div style="font-size:28px;font-weight:800;color:#1a1a1a;line-height:1;" id="card-num-2">342</div>
+        <div class="stat-delta-pos" style="margin-top:6px;" id="card-delta-2">较上周增长 26人</div>
       </div>
-      <!-- 转化客户 -->
+      <!-- 留资客户 -->
       <div class="stat-card" id="card-3" onclick="filterByCard(3)">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
-          <span style="font-size:12px;color:#666;">转化客户<span class="def-tip" data-tip="留资后有预约、进店、付费记录的客户">ⓘ</span></span>
-          <span class="stat-badge-red" id="card-badge-3">-5%</span>
+          <span style="font-size:12px;color:#666;">留资客户<span class="def-tip" data-tip="已完成留资的客户，含有真实联系方式的线索及个微复制、唤端等留资行为">ⓘ</span></span>
+          <span class="stat-badge-green" id="card-badge-3">+5%</span>
         </div>
-        <div style="font-size:28px;font-weight:800;color:#1a1a1a;line-height:1;" id="card-num-3">67</div>
-        <div class="stat-delta-neg" style="margin-top:6px;" id="card-delta-3">较上周减少 3人</div>
-        
+        <div style="font-size:28px;font-weight:800;color:#1a1a1a;line-height:1;" id="card-num-3">214</div>
+        <div class="stat-delta-pos" style="margin-top:6px;" id="card-delta-3">较上周增长 11人</div>
+      </div>
     </div>
 
     <!-- 卡片激活提示条（已隐藏，改为重置按钮高亮引导） -->
@@ -236,8 +236,39 @@
     </div>
 
     <!-- 筛选栏 -->
-    <div style="background:#fff;border-radius:10px;padding:12px 16px;display:flex;flex-direction:column;gap:8px;">
+    <div style="background:#fff;border-radius:10px 10px 0 0;padding:12px 16px;display:flex;flex-direction:column;gap:8px;border-bottom:1px solid #f0f0f0;">
       <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;">
+        <!-- 客户行为 -->
+        <select class="filter-select" id="fs-behavior" onchange="renderList()">
+          <option value="">全部客户行为</option>
+          <option>进线</option><option>开口</option><option>留资</option><option>评论</option><option>关注</option>
+        </select>
+        <!-- 行为时间 -->
+        <div style="position:relative;display:inline-block;" id="datePickerWrap">
+          <button id="datePickerTrigger" onclick="toggleDatePicker(event)"
+            class="filter-select"
+            style="min-width:110px;display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;text-align:left;white-space:nowrap;">
+            <svg style="width:13px;height:13px;flex-shrink:0;color:#aaa;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+            </svg>
+            <span id="datePickerLabel" style="font-size:12px;color:#888;">行为时间</span>
+          </button>
+          <div id="datePickerPanel" style="display:none;position:fixed;top:auto;left:auto;z-index:900;background:#fff;border:1px solid #e5e7eb;border-radius:12px;box-shadow:0 8px 32px rgba(0,0,0,.12);padding:16px 18px 14px;min-width:560px;">
+            <div style="display:flex;gap:28px;">
+              <div id="calLeft" style="flex:1;"></div>
+              <div id="calRight" style="flex:1;"></div>
+            </div>
+            <div style="border-top:1px solid #f0f0f0;margin-top:10px;padding-top:10px;display:flex;align-items:center;gap:6px;flex-wrap:wrap;">
+              <span id="dateRangeLabel" style="font-size:12px;color:#888;flex:1;min-width:140px;"></span>
+              <button onclick="applyDatePresetQuick('today')" class="_quick-btn">今天</button>
+              <button onclick="applyDatePresetQuick('yesterday')" class="_quick-btn">昨天</button>
+              <button onclick="applyDatePresetQuick('7d')" class="_quick-btn">近7天</button>
+              <button onclick="applyDatePresetQuick('30d')" class="_quick-btn">近30天</button>
+              <button onclick="clearDatePicker()" class="_quick-btn">清除</button>
+              <button onclick="confirmDatePicker()" style="font-size:11px;padding:3px 10px;border-radius:6px;background:#1a1a1a;color:#fff;border:none;cursor:pointer;">确定</button>
+            </div>
+          </div>
+        </div>
         <!-- 隐藏的日期值 -->
         <input type="hidden" id="fs-date-s">
         <input type="hidden" id="fs-date-e">
@@ -279,10 +310,10 @@
           <option>私信留资</option><option>客服打标</option><option>留资卡</option><option>企微名片</option><option>落地页</option><option>预约组件</option><option>个微名片</option><option>交易卡</option><option>落地页_直播间</option>
         </select>
       </div>
-    </div></div>
+    </div>
 
     <!-- 客户列表 -->
-    <div style="background:#fff;border-radius:10px;overflow:hidden;">
+    <div style="background:#fff;border-radius:0 0 10px 10px;overflow:hidden;margin-bottom:12px;">
       <div style="overflow-x:auto;"><div style="min-width:1800px;">
       <div class="table-header" style="grid-template-columns:36px 1.6fr 1.5fr 1fr 1.3fr 1.3fr 1.3fr 0.8fr 1fr 1fr 1.2fr 1.1fr 1.1fr 1.1fr 1.3fr 1.1fr;">
         <div style="display:flex;align-items:center;justify-content:center;">
@@ -542,7 +573,7 @@ function renderList() {
   let list = emptyConvertFilter
     ? customers.filter(c => !c.convert)
     : activeCard !== null
-      ? customers.filter(c => c.tag === ['开口客户','潜在客户','留资客户','转化客户'][activeCard])
+      ? customers.filter(c => c.tag === ['进线客户','开口客户','潜在客户','留资客户'][activeCard])
       : customers;
 
   if (_fTraffic)  list = list.filter(c => (c.trafficType||'') === _fTraffic);
@@ -638,7 +669,7 @@ function filterByCard(idx) {
   } else {
     activeCard = idx;
     cards.forEach((c,i)=>c.classList.toggle('active',i===idx));
-    const labels = ['开口客户','潜在客户','留资客户','转化客户'];
+    const labels = ['进线客户','开口客户','潜在客户','留资客户'];
     document.getElementById('cardFilterLabel').textContent = labels[idx];
     _setResetHighlight(true);
   }
@@ -905,6 +936,11 @@ function toggleDatePicker(e){
   e.stopPropagation();
   const panel=document.getElementById('datePickerPanel');
   if(panel.style.display==='block'){panel.style.display='none';return;}
+  // 用 fixed 定位到触发按钮下方
+  const btn=document.getElementById('datePickerTrigger');
+  const rect=btn.getBoundingClientRect();
+  panel.style.top=(rect.bottom+4)+'px';
+  panel.style.left=rect.left+'px';
   panel.style.display='block';
   // 若没有已选区间，初始化日历
   if(!_calPickStart){
