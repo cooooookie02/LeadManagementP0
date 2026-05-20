@@ -10,14 +10,19 @@
   body { background:#f5f5f5; }
 
   /* ---- 侧边栏 ---- */
-  .sidebar { background:#fff; width:168px; min-height:100vh; display:flex; flex-direction:column; flex-shrink:0; border-right:1px solid #ebebeb; }
-  .sidebar-logo { padding:14px 14px 12px; border-bottom:1px solid #f0f0f0; display:flex; align-items:center; gap:8px; }
-  .sidebar-logo-icon { width:26px; height:26px; background:#18a058; border-radius:6px; display:flex; align-items:center; justify-content:center; }
+  .sidebar { background:#fff; width:200px; min-height:100vh; display:flex; flex-direction:column; flex-shrink:0; border-right:1px solid #e8e8e8; }
+  .sidebar-logo { padding:16px 16px 14px; border-bottom:1px solid #f0f0f0; display:flex; align-items:center; gap:10px; }
+  .sidebar-logo-icon { width:32px; height:32px; background:#ff2442; border-radius:8px; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
   .sidebar-section-label { font-size:10px; color:#b0b0b0; padding:14px 14px 4px; letter-spacing:.06em; font-weight:600; }
-  .nav-item { display:flex; align-items:center; gap:8px; padding:7px 12px; margin:1px 6px; border-radius:7px; font-size:12px; cursor:pointer; color:#666; transition:all .15s; }
-  .nav-item:hover { background:#f5f5f5; color:#333; }
-  .nav-item.active { background:#f0f0f0; color:#1a1a1a; font-weight:600; }
-  .nav-item.active svg { color:#1a1a1a; }
+  .nav-item { display:flex; align-items:center; gap:9px; padding:9px 16px; font-size:13px; cursor:pointer; color:#333; transition:all .15s; position:relative; }
+  .nav-item:hover { background:#f5f5f5; color:#222; }
+  .nav-item.active { background:#f0f4ff; color:#3370ff; font-weight:500; }
+  .nav-item.active::before { content:''; position:absolute; left:0; top:4px; bottom:4px; width:3px; background:#3370ff; border-radius:0 2px 2px 0; }
+  .nav-sub { display:flex; align-items:center; padding:8px 16px 8px 42px; font-size:13px; cursor:pointer; color:#555; transition:all .15s; }
+  .nav-sub:hover { color:#222; background:#f9f9f9; }
+  .nav-sub.active { color:#3370ff; font-weight:500; background:#f0f4ff; position:relative; }
+  .nav-sub.active::before { content:''; position:absolute; left:0; top:4px; bottom:4px; width:3px; background:#3370ff; border-radius:0 2px 2px 0; }
+  .nav-group-arrow { margin-left:auto; transition:transform .2s; }
   .new-task-btn { margin:12px 10px 6px; background:#1a1a1a; color:#fff; border-radius:8px; padding:8px 12px; font-size:12px; font-weight:600; display:flex; align-items:center; justify-content:center; gap:6px; cursor:pointer; }
   .new-task-btn:hover { background:#333; }
 
@@ -114,60 +119,84 @@
 
 <!-- ============ 侧边栏 ============ -->
 <div class="sidebar">
+  <!-- Logo -->
   <div class="sidebar-logo">
     <div class="sidebar-logo-icon">
-      <svg style="width:16px;height:16px;color:#fff;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+      <!-- 小红书图标 -->
+      <svg style="width:20px;height:20px;color:#fff;" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
     </div>
-    <div>
-      <div style="color:#1a1a1a;font-size:13px;font-weight:700;">LeadClaw</div>
-      <div style="color:#aaa;font-size:10px;">AI经营工作台</div>
+    <div style="color:#1a1a1a;font-size:14px;font-weight:700;letter-spacing:.02em;">专业号平台</div>
+  </div>
+
+  <!-- 导航列表 -->
+  <div style="flex:1;overflow-y:auto;padding:8px 0;">
+
+    <!-- 首页 -->
+    <div class="nav-item" style="margin-top:4px;">
+      <svg style="width:16px;height:16px;flex-shrink:0;color:#888;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zm10 0a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg>
+      <span>首页</span>
     </div>
-  </div>
 
-  <div style="padding:10px 10px 6px;">
-    <div class="new-task-btn">
-      <svg style="width:13px;height:13px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 4v16m8-8H4"/></svg>新建任务
+    <!-- 咨询服务（展开） -->
+    <div class="nav-item" style="margin-top:2px;">
+      <svg style="width:16px;height:16px;flex-shrink:0;color:#888;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
+      <span>咨询服务</span>
+      <svg class="nav-group-arrow" style="width:14px;height:14px;color:#bbb;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
     </div>
-  </div>
+    <!-- 咨询服务子菜单 -->
+    <div class="nav-sub">私信经营工具箱</div>
+    <div class="nav-sub">私信通</div>
+    <div class="nav-sub">获客工具</div>
+    <div class="nav-sub">私信服务组件</div>
+    <div class="nav-sub">私信咨询分</div>
+    <div class="nav-sub active">客户管理</div>
+    <div class="nav-sub">揽客管理</div>
 
-  <div class="nav-item" style="margin-top:4px;">
-    <svg style="width:14px;height:14px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>智能工具
-  </div>
-
-  <div class="sidebar-section-label">经营管理</div>
-  <div class="nav-item active">
-    <svg style="width:14px;height:14px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>客户管理
-  </div>
-  <div class="nav-item">
-    <svg style="width:14px;height:14px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>经营工具
-  </div>
-
-  <div class="sidebar-section-label">私信工具</div>
-  <div class="nav-item">
-    <svg style="width:14px;height:14px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>私信通
-  </div>
-  <div class="nav-item">
-    <svg style="width:14px;height:14px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>私信经营工具箱
-  </div>
-  <div class="nav-item">
-    <svg style="width:14px;height:14px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>获客工具
-  </div>
-  <div class="nav-item">
-    <svg style="width:14px;height:14px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zm0 8a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zm12 0a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z"/></svg>私信服务组件
-  </div>
-  <div class="nav-item">
-    <svg style="width:14px;height:14px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>私信咨询分
-  </div>
-  <div class="nav-item">
-    <svg style="width:14px;height:14px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 10-9.78 2.096A4.001 4.001 0 003 15z"/></svg>三方客服工具
-  </div>
-
-  <div style="flex:1;"></div>
-  <div style="padding:10px 12px 14px;border-top:1px solid #f0f0f0;">
-    <div style="display:flex;align-items:center;gap:8px;">
-      <div style="width:28px;height:28px;border-radius:50%;background:#e5e7eb;display:flex;align-items:center;justify-content:center;color:#6b7280;font-size:11px;">管</div>
-      <div><div style="color:#1a1a1a;font-size:12px;">管理员</div><div style="color:#aaa;font-size:10px;">免费版</div></div>
+    <!-- 内容管理（折叠） -->
+    <div class="nav-item" style="margin-top:2px;">
+      <svg style="width:16px;height:16px;flex-shrink:0;color:#888;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+      <span>内容管理</span>
+      <svg class="nav-group-arrow" style="width:14px;height:14px;color:#bbb;transform:rotate(180deg);" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
     </div>
+
+    <!-- 营销工具（折叠） -->
+    <div class="nav-item" style="margin-top:2px;">
+      <svg style="width:16px;height:16px;flex-shrink:0;color:#888;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+      <span>营销工具</span>
+      <svg class="nav-group-arrow" style="width:14px;height:14px;color:#bbb;transform:rotate(180deg);" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
+    </div>
+
+    <!-- 数据中心（展开） -->
+    <div class="nav-item" style="margin-top:2px;">
+      <svg style="width:16px;height:16px;flex-shrink:0;color:#888;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"/></svg>
+      <span>数据中心</span>
+      <svg class="nav-group-arrow" style="width:14px;height:14px;color:#bbb;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
+    </div>
+    <!-- 数据中心子菜单 -->
+    <div class="nav-sub">笔记表现</div>
+    <div class="nav-sub">粉丝数据</div>
+    <div class="nav-sub">个人主页</div>
+    <div class="nav-sub">员工数据</div>
+
+    <!-- 商业推广 -->
+    <div class="nav-item" style="margin-top:2px;">
+      <svg style="width:16px;height:16px;flex-shrink:0;color:#888;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"/></svg>
+      <span>商业推广</span>
+    </div>
+
+    <!-- 账号管理（折叠） -->
+    <div class="nav-item" style="margin-top:2px;">
+      <svg style="width:16px;height:16px;flex-shrink:0;color:#888;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+      <span>账号管理</span>
+      <svg class="nav-group-arrow" style="width:14px;height:14px;color:#bbb;transform:rotate(180deg);" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7"/></svg>
+    </div>
+
+    <!-- 平台操作日志 -->
+    <div class="nav-item" style="margin-top:2px;">
+      <svg style="width:16px;height:16px;flex-shrink:0;color:#888;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" stroke-width="2"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9h18M9 21V9"/></svg>
+      <span>平台操作日志</span>
+    </div>
+
   </div>
 </div>
 
@@ -278,6 +307,11 @@
           <option>进线客户</option><option>开口客户</option><option>潜在客户</option><option>留资客户</option><option>流失客户</option><option>转化客户</option>
           <option>高意向未成交</option><option>KOS转介绍</option><option>已到店</option><option>VIP客户</option>
         </select>
+        <!-- 流量类型 -->
+        <select class="filter-select" id="fs-traffictype" onchange="renderList()">
+          <option value="">全部流量类型</option>
+          <option>广告流量</option><option>自然流量</option>
+        </select>
         <!-- 搜索框 -->
         <input class="filter-input" id="fs-search" placeholder="搜索客户名称/手机号/ID" style="max-width:210px;">
         <!-- 更多筛选 -->
@@ -301,9 +335,16 @@
           <option value="">全部归属账号</option>
           <option>薯店-小红书</option><option>薯店-广告</option>
         </select>
-        <select class="filter-select" id="mf-traffictype" onchange="renderList()">
-          <option value="">全部流量类型</option>
-          <option>广告流量</option><option>自然流量</option>
+        <select class="filter-select" id="mf-interacttype" onchange="renderList()">
+          <option value="">全部互动类型</option>
+          <option>评论</option><option>关注</option>
+        </select>
+        <select class="filter-select" id="mf-leadsource" onchange="renderList()">
+          <option value="">全部线索来源</option>
+          <option>笔记：小红书考研全程规划指南</option>
+          <option>直播间：5月冲刺班限时报名直播</option>
+          <option>直播间：暑期集训营招生专场</option>
+          <option>直播间：名师公开课免费试听专场</option>
         </select>
         <select class="filter-select" id="mf-leadtype" onchange="renderList()">
           <option value="">全部留资方式</option>
@@ -314,12 +355,12 @@
 
     <!-- 客户列表 -->
     <div style="background:#fff;border-radius:0 0 10px 10px;overflow:hidden;margin-bottom:12px;">
-      <div style="overflow-x:auto;"><div style="min-width:1800px;">
-      <div class="table-header" style="grid-template-columns:36px 1.6fr 1.5fr 1fr 1.4fr 1.2fr 1.3fr 1.3fr 0.8fr 1fr 1fr 1.2fr 1.1fr 1.1fr 1.1fr 1.3fr 1.1fr;min-width:2000px;">
+      <div style="overflow-x:auto;"><div style="min-width:2160px;">
+      <div class="table-header" style="grid-template-columns:36px 1.6fr 1.5fr 1fr 0.9fr 1.2fr 1.3fr 1.3fr 1.3fr 0.8fr 1fr 1.6fr 1fr 1.2fr 1.1fr 1.1fr 1.1fr 1.3fr 1.1fr;">
         <div style="display:flex;align-items:center;justify-content:center;">
           <input type="checkbox" id="checkAll" onchange="toggleCheckAll(this.checked)" style="width:14px;height:14px;cursor:pointer;accent-color:#1a1a1a;">
         </div>
-        <div>用户昵称</div><div>用户ID</div><div>归属账号</div><div>互动类型</div><div>最新互动时间</div><div>最新进线时间</div><div>最近开口时间</div><div>最近留资时间</div><div>留资次数</div><div>流量类型</div><div>客户标签</div><div>转化结果</div><div>电话</div><div>微信</div><div>留资方式</div><div>备注</div><div>操作</div>
+        <div>用户昵称</div><div>用户ID</div><div>归属账号</div><div>互动类型</div><div>最新互动时间</div><div>最新进线时间</div><div>最近开口时间</div><div>最近留资时间</div><div>留资次数</div><div>流量类型</div><div>线索来源</div><div>客户标签</div><div>转化结果</div><div>电话</div><div>微信</div><div>留资方式</div><div>备注</div><div>操作</div>
       </div>
       <div id="custList"></div>
       </div></div>
@@ -525,15 +566,15 @@ let customTags = [
 function allTags() { return [...SYS_TAGS, ...customTags]; }
 
 const customers = [
-  { name:'小红书69FB24AC',  phone:'125****1012', uid:'69fb07df000000002001002', account:'薯店-小红书', interactTypes:['评论','关注'], interactTime:'2026-05-06 17:18', enterTime:'2026-05-06 17:20', openTime:'2026-05-06 18:05', leadTime:'2026-05-06 18:12', tag:'开口客户', tagColor:'green', wx:'wxid_abc', leadType:'私信留资', trafficType:'广告流量', convert:'', leads:3, remark:'对价格很感兴趣，周五回访', featureTags:['高潜成交'] },
-  { name:'小红书671C9221',  phone:'138****8888', uid:'671b4d0800000000...', account:'薯店-小红书', interactTypes:['关注'], interactTime:'2026-05-07 12:15', enterTime:'2026-05-07 12:29', openTime:'—', leadTime:'—', tag:'潜在客户', tagColor:'blue', wx:'—', leadType:'客服打标', trafficType:'自然流量', convert:'', leads:1, remark:'', featureTags:[] },
-  { name:'绿索在夜理',      phone:'139****6666', uid:'5f10672b000000010101c362', account:'薯店-广告', interactTypes:['评论'], interactTime:'2026-05-06 16:52', enterTime:'2026-05-06 17:00', openTime:'2026-05-06 17:30', leadTime:'2026-05-06 17:45', tag:'留资客户', tagColor:'purple', wx:'green_night', leadType:'落地页', trafficType:'广告流量', convert:'', leads:2, remark:'已发方案，等待回复', featureTags:['高潜成交'] },
-  { name:'麦克善',          phone:'186****9999', uid:'667d3273000000001b018c69', account:'薯店-小红书', interactTypes:[], interactTime:'', enterTime:'2026-05-01 08:37', openTime:'2026-05-01 09:00', leadTime:'—', tag:'开口客户', tagColor:'green', wx:'—', leadType:'私信留资', trafficType:'自然流量', convert:'', leads:1, remark:'', featureTags:[] },
-  { name:'我看你像1012个人', phone:'137****5555', uid:'664fd9e0000000...', account:'薯店-广告', interactTypes:['评论','关注'], interactTime:'2026-05-07 11:30', enterTime:'2026-05-07 11:45', openTime:'—', leadTime:'—', tag:'流失客户', tagColor:'gray', wx:'—', leadType:'—', trafficType:'广告流量', convert:'', leads:0, remark:'', featureTags:[] },
-  { name:'小红书671BBF8F',  phone:'—',          uid:'671b499900000000e00b577', account:'薯店-小红书', interactTypes:['评论'], interactTime:'2026-05-07 10:58', enterTime:'2026-05-07 11:06', openTime:'2026-05-07 11:20', leadTime:'2026-05-07 11:35', tag:'潜在客户', tagColor:'blue', wx:'wxid_xdf', leadType:'留资卡', trafficType:'自然流量', convert:'', leads:4, remark:'', featureTags:[] },
-  { name:'灰白',            phone:'—',          uid:'5f8fdd9e0000000...', account:'薯店-小红书', interactTypes:[], interactTime:'', enterTime:'2026-05-03 01:17', openTime:'2026-05-03 01:40', leadTime:'—', tag:'流失客户', tagColor:'gray', wx:'—', leadType:'私信留资', trafficType:'自然流量', convert:'', leads:1, remark:'', featureTags:[] },
-  { name:'小红书671AA2F1',  phone:'131****7788', uid:'671aa2f1000000...', account:'薯店-广告', interactTypes:['关注'], interactTime:'2026-05-08 09:03', enterTime:'2026-05-08 09:12', openTime:'2026-05-08 09:30', leadTime:'2026-05-08 09:55', tag:'转化客户', tagColor:'orange', wx:'wxid_conv1', leadType:'落地页', trafficType:'广告流量', convert:'预约', leads:5, remark:'5月16日到店', featureTags:[] },
-  { name:'陈小姐',          phone:'150****3344', uid:'cc1234560000000...', account:'薯店-小红书', interactTypes:['评论','关注'], interactTime:'2026-05-07 13:44', enterTime:'2026-05-07 14:00', openTime:'2026-05-07 14:22', leadTime:'2026-05-07 14:30', tag:'高意向未成交', tagColor:'purple', wx:'chen_lady', leadType:'企微名片', trafficType:'自然流量', convert:'', leads:2, remark:'', featureTags:['高意向未成交'] },
+  { name:'小红书69FB24AC',  phone:'125****1012', uid:'69fb07df000000002001002', account:'薯店-小红书', interactTypes:['评论','关注'], interactTime:'2026-05-06 17:18', enterTime:'2026-05-06 17:20', openTime:'2026-05-06 18:05', leadTime:'2026-05-06 18:12', tag:'开口客户', tagColor:'green', wx:'wxid_abc', leadType:'私信留资', trafficType:'广告流量', leadSource:'笔记：小红书考研全程规划指南', convert:'', leads:3, remark:'对价格很感兴趣，周五回访', featureTags:['高潜成交'] },
+  { name:'小红书671C9221',  phone:'138****8888', uid:'671b4d0800000000...', account:'薯店-小红书', interactTypes:['关注'], interactTime:'2026-05-07 12:15', enterTime:'2026-05-07 12:29', openTime:'—', leadTime:'—', tag:'潜在客户', tagColor:'blue', wx:'—', leadType:'客服打标', trafficType:'自然流量', leadSource:'', convert:'', leads:1, remark:'', featureTags:[] },
+  { name:'绿索在夜理',      phone:'139****6666', uid:'5f10672b000000010101c362', account:'薯店-广告', interactTypes:['评论'], interactTime:'2026-05-06 16:52', enterTime:'2026-05-06 17:00', openTime:'2026-05-06 17:30', leadTime:'2026-05-06 17:45', tag:'留资客户', tagColor:'purple', wx:'green_night', leadType:'落地页', trafficType:'广告流量', leadSource:'直播间：5月冲刺班限时报名直播', convert:'', leads:2, remark:'已发方案，等待回复', featureTags:['高潜成交'] },
+  { name:'麦克善',          phone:'186****9999', uid:'667d3273000000001b018c69', account:'薯店-小红书', interactTypes:[], interactTime:'', enterTime:'2026-05-01 08:37', openTime:'2026-05-01 09:00', leadTime:'—', tag:'开口客户', tagColor:'green', wx:'—', leadType:'私信留资', trafficType:'自然流量', leadSource:'', convert:'', leads:1, remark:'', featureTags:[] },
+  { name:'我看你像1012个人', phone:'137****5555', uid:'664fd9e0000000...', account:'薯店-广告', interactTypes:['评论','关注'], interactTime:'2026-05-07 11:30', enterTime:'2026-05-07 11:45', openTime:'—', leadTime:'—', tag:'流失客户', tagColor:'gray', wx:'—', leadType:'—', trafficType:'广告流量', leadSource:'直播间：暑期集训营招生专场', convert:'', leads:0, remark:'', featureTags:[] },
+  { name:'小红书671BBF8F',  phone:'—',          uid:'671b499900000000e00b577', account:'薯店-小红书', interactTypes:['评论'], interactTime:'2026-05-07 10:58', enterTime:'2026-05-07 11:06', openTime:'2026-05-07 11:20', leadTime:'2026-05-07 11:35', tag:'潜在客户', tagColor:'blue', wx:'wxid_xdf', leadType:'留资卡', trafficType:'自然流量', leadSource:'', convert:'', leads:4, remark:'', featureTags:[] },
+  { name:'灰白',            phone:'—',          uid:'5f8fdd9e0000000...', account:'薯店-小红书', interactTypes:[], interactTime:'', enterTime:'2026-05-03 01:17', openTime:'2026-05-03 01:40', leadTime:'—', tag:'流失客户', tagColor:'gray', wx:'—', leadType:'私信留资', trafficType:'自然流量', leadSource:'', convert:'', leads:1, remark:'', featureTags:[] },
+  { name:'小红书671AA2F1',  phone:'131****7788', uid:'671aa2f1000000...', account:'薯店-广告', interactTypes:['关注'], interactTime:'2026-05-08 09:03', enterTime:'2026-05-08 09:12', openTime:'2026-05-08 09:30', leadTime:'2026-05-08 09:55', tag:'转化客户', tagColor:'orange', wx:'wxid_conv1', leadType:'落地页', trafficType:'广告流量', leadSource:'直播间：名师公开课免费试听专场', convert:'预约', leads:5, remark:'5月16日到店', featureTags:[] },
+  { name:'陈小姐',          phone:'150****3344', uid:'cc1234560000000...', account:'薯店-小红书', interactTypes:['评论','关注'], interactTime:'2026-05-07 13:44', enterTime:'2026-05-07 14:00', openTime:'2026-05-07 14:22', leadTime:'2026-05-07 14:30', tag:'留资客户', tagColor:'purple', wx:'chen_lady', leadType:'企微名片', trafficType:'自然流量', leadSource:'', convert:'', leads:2, remark:'', featureTags:['高意向未成交'] },
 ];
 
 let activeCard = null;
@@ -563,12 +604,14 @@ function syncCheckAll() {
 }
 
 function renderList() {
-  const _fTraffic  = (document.getElementById('mf-traffictype')||{}).value||'';
-  const _fLeadType = (document.getElementById('mf-leadtype')||{}).value||'';
-  const _fConvert  = (document.getElementById('mf-convert')||{}).value||'';
-  const _fAccount  = (document.getElementById('mf-account')||{}).value||'';
-  const _fSearch   = ((document.getElementById('fs-search')||{}).value||'').trim();
-  const _fTag      = (document.getElementById('fs-tag')||{}).value||'';
+  const _fInteract   = (document.getElementById('mf-interacttype')||{}).value||'';
+  const _fTraffic    = (document.getElementById('fs-traffictype')||{}).value||'';
+  const _fLeadType   = (document.getElementById('mf-leadtype')||{}).value||'';
+  const _fConvert    = (document.getElementById('mf-convert')||{}).value||'';
+  const _fAccount    = (document.getElementById('mf-account')||{}).value||'';
+  const _fLeadSource = (document.getElementById('mf-leadsource')||{}).value||'';
+  const _fSearch     = ((document.getElementById('fs-search')||{}).value||'').trim();
+  const _fTag        = (document.getElementById('fs-tag')||{}).value||'';
 
   let list = emptyConvertFilter
     ? customers.filter(c => !c.convert)
@@ -576,10 +619,12 @@ function renderList() {
       ? customers.filter(c => c.tag === ['进线客户','开口客户','潜在客户','留资客户'][activeCard])
       : customers;
 
-  if (_fTraffic)  list = list.filter(c => (c.trafficType||'') === _fTraffic);
-  if (_fLeadType) list = list.filter(c => (c.leadType||'') === _fLeadType);
-  if (_fConvert)  list = list.filter(c => (c.convert||'') === _fConvert);
-  if (_fAccount)  list = list.filter(c => (c.account||'') === _fAccount);
+  if (_fInteract)   list = list.filter(c => (c.interactTypes||[]).includes(_fInteract));
+  if (_fTraffic)    list = list.filter(c => (c.trafficType||'') === _fTraffic);
+  if (_fLeadType)   list = list.filter(c => (c.leadType||'') === _fLeadType);
+  if (_fConvert)    list = list.filter(c => (c.convert||'') === _fConvert);
+  if (_fAccount)    list = list.filter(c => (c.account||'') === _fAccount);
+  if (_fLeadSource) list = list.filter(c => (c.leadSource||'') === _fLeadSource);
   if (_fTag)      list = list.filter(c => (c.tag||'') === _fTag);
   if (_fSearch)   list = list.filter(c => c.name.includes(_fSearch) || (c.phone||'').includes(_fSearch) || (c.uid||'').includes(_fSearch));
 
@@ -596,7 +641,7 @@ function renderList() {
       const avatarBg = avatarColors[c.name[0]] || '#e5e7eb';
       const avatarFg = avatarBg==='#e5e7eb' ? '#6b7280' : '#374151';
       const isChecked = selectedRows.has(c.uid);
-      return `<div class="table-row" style="display:grid;grid-template-columns:36px 1.6fr 1.5fr 1fr 1.4fr 1.2fr 1.3fr 1.3fr 0.8fr 1fr 1fr 1.2fr 1.1fr 1.1fr 1.1fr 1.3fr 1.1fr;min-width:2000px;${isChecked?'background:#f0fdf4;':''}" id="row-${c.uid}">
+      return `<div class="table-row" style="display:grid;grid-template-columns:36px 1.6fr 1.5fr 1fr 0.9fr 1.2fr 1.3fr 1.3fr 1.3fr 0.8fr 1fr 1.6fr 1fr 1.2fr 1.1fr 1.1fr 1.1fr 1.3fr 1.1fr;min-width:2160px;${isChecked?'background:#f0fdf4;':''}" id="row-${c.uid}">
         <div style="display:flex;align-items:center;justify-content:center;">
           <input type="checkbox" data-uid="${c.uid}" ${isChecked?'checked':''} onchange="toggleRowCheck(this)" style="width:14px;height:14px;cursor:pointer;accent-color:#1a1a1a;">
         </div>
@@ -606,8 +651,8 @@ function renderList() {
         </div>
         <div style="font-size:11px;color:#888;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${c.uid}</div>
         <div style="font-size:12px;color:#555;">${c.account}</div>
-        <div>${(c.interactTypes||[]).map(t=>`<span style="display:inline-flex;align-items:center;padding:2px 8px;border-radius:20px;background:#f3f4f6;border:1px solid #e5e7eb;font-size:11px;color:#4b5563;white-space:nowrap;">${t}</span>`).join('<span style="width:4px;display:inline-block;"></span>')|| '<span style="color:#ccc;">—</span>'}</div>
-        <div style="font-size:11px;color:#555;">${c.interactTime||'—'}</div>
+        <div style="display:flex;flex-wrap:wrap;gap:3px;align-items:center;">${(c.interactTypes&&c.interactTypes.length)?c.interactTypes.map(t=>`<span style="display:inline-flex;align-items:center;padding:2px 7px;border-radius:20px;font-size:11px;font-weight:500;background:#f3f4f6;color:#4b5563;border:1px solid #e5e7eb;">${t}</span>`).join(''):'<span style="color:#ccc;">—</span>'}</div>
+        <div style="font-size:11px;color:#555;">${(c.interactTypes&&c.interactTypes.length&&c.interactTime)?c.interactTime:'—'}</div>
         <div style="font-size:11px;color:#555;">${c.enterTime}</div>
         <div style="font-size:11px;color:#555;">${c.openTime}</div>
         <div style="font-size:11px;color:#555;">${c.leadTime}</div>
@@ -617,6 +662,7 @@ function renderList() {
             : `<span style="color:#ccc;">—</span>`}
         </div>
         <div style="font-size:12px;color:#555;">${c.trafficType||'—'}</div>
+        <div style="font-size:12px;color:#555;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="${c.leadSource||''}">${c.leadSource||'—'}</div>
         <div>${(()=>{
   // 阶段系统标签：c.tag 命中的那个（只显示一个）
   const stageTag = allTags().find(t=>t.tagType==='stage' && t.name===c.tag);
@@ -1683,7 +1729,7 @@ function openExportPanel() {
               <div style="width:15px;height:15px;border-radius:50%;border:2px solid #1a1a1a;background:#1a1a1a;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;" id="exp-rdot-all"><div style="width:5px;height:5px;border-radius:50%;background:#fff;"></div></div>
               <div>
                 <div style="font-size:12px;font-weight:600;color:#1a1a1a;">当前筛选结果</div>
-                <div style="font-size:11px;color:#aaa;margin-top:2px;">导出列表筛选条件下的全部数据</div>
+                <div style="font-size:11px;color:#aaa;margin-top:2px;">导出列表当前筛选条件下的全部数据</div>
                 <div style="margin-top:6px;"><span onclick="goToFilter()" style="font-size:11px;color:#18a058;cursor:pointer;text-decoration:underline;text-underline-offset:2px;">去筛选 →</span></div>
               </div>
             </div>
@@ -1691,8 +1737,8 @@ function openExportPanel() {
               style="flex:1;border:1.5px solid #e5e7eb;border-radius:9px;padding:10px 12px;cursor:pointer;display:flex;align-items:flex-start;gap:8px;">
               <div style="width:15px;height:15px;border-radius:50%;border:2px solid #d1d5db;background:#fff;flex-shrink:0;margin-top:2px;" id="exp-rdot-sel"></div>
               <div>
-                <div style="font-size:12px;font-weight:600;color:#1a1a1a;">已勾选数据</div>
-                <div style="font-size:11px;color:#aaa;margin-top:2px;">仅导出列表中手动勾选的客户（<span id="exp-sel-count">${selectedRows.size}</span> 条）</div>
+                <div style="font-size:12px;font-weight:600;color:#1a1a1a;">全部数据（近30天）</div>
+                <div style="font-size:11px;color:#aaa;margin-top:2px;">导出近30天内所有客户数据</div>
               </div>
             </div>
           </div>
@@ -1703,7 +1749,7 @@ function openExportPanel() {
             <span onclick="toggleAllExportFields()" style="color:#18a058;cursor:pointer;" id="exp-field-toggle">取消全选</span>
           </div>
           <div style="display:flex;flex-wrap:wrap;gap:6px;" id="exp-fields">
-            ${['用户昵称','用户ID','归属账号','最新进线时间','最近开口时间','最近留资时间','转化结果','电话','微信','留资方式','客户标签'].map(f=>`<div class="_exp-field-tag _exp-selected" data-field="${f}" onclick="toggleExportField(this)" style="font-size:12px;padding:4px 10px;border-radius:20px;border:1.5px solid #18a058;background:#fff;color:#18a058;cursor:pointer;">${f}</div>`).join('')}
+            ${['用户昵称','用户ID','归属账号','互动类型','最新互动时间','最新进线时间','最近开口时间','最近留资时间','流量类型','线索来源','转化结果','电话','微信','留资方式','客户标签'].map(f=>`<div class="_exp-field-tag _exp-selected" data-field="${f}" onclick="toggleExportField(this)" style="font-size:12px;padding:4px 10px;border-radius:20px;border:1.5px solid #18a058;background:#fff;color:#18a058;cursor:pointer;">${f}</div>`).join('')}
           </div>
         </div>
       </div>
@@ -1949,7 +1995,7 @@ function doExport(){
   }
   const fields=Array.from(document.querySelectorAll('._exp-field-tag._exp-selected')).map(el=>el.dataset.field);
   if(!fields.length){toast('请至少选择一个导出字段');return;}
-  const rangeText=_expRange==='sel'?`已勾选 ${selectedRows.size} 条`:'当前筛选全部数据';
+  const rangeText=_expRange==='sel'?'全部数据（近30天）':'当前筛选结果';
   toast(`导出任务已生成（${rangeText}），请稍后在「下载中心」查收`);
   document.getElementById('exportModal').remove();
 }
@@ -1978,7 +2024,8 @@ function resetFilter() {
   document.getElementById('fs-date-e').value='';
   _calPickStart=null;_calPickEnd=null;
   _updateDateTriggerLabel(null);
-  ['mf-convert','mf-account','mf-traffictype','mf-leadtype'].forEach(id=>{ const el=document.getElementById(id); if(el) el.value=''; });
+  const fsTraffic=document.getElementById('fs-traffictype'); if(fsTraffic) fsTraffic.value='';
+  ['mf-convert','mf-account','mf-interacttype','mf-leadtype','mf-leadsource'].forEach(id=>{ const el=document.getElementById(id); if(el) el.value=''; });
   renderList();
 }
 
@@ -2037,7 +2084,6 @@ function openDetail(uidOrName) {
         ['所属地域', c.region||'—'],
         ['备注', c.remark||'—'],
         ['接待客服', c.staff||'—'],
-        ['线索标签', c.tag||'—'],
       ].map(([k,v])=>`<div style="display:flex;padding:12px 0;border-bottom:1px solid #f5f5f5;gap:12px;">
         <span style="font-size:13px;color:#aaa;width:100px;flex-shrink:0;">${k}</span>
         <span style="font-size:13px;color:#1a1a1a;flex:1;">${v}</span>
