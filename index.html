@@ -206,7 +206,7 @@
   <div class="topbar">
     <div style="font-size:16px;font-weight:700;color:#1a1a1a;">客户管理</div>
     <div style="display:flex;align-items:center;gap:8px;">
-      <button onclick="openExportPanel()" style="font-size:12px;" class="filter-btn">
+      <button onclick="openApiPanel()" style="font-size:12px;" class="filter-btn">
         <svg style="width:13px;height:13px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><circle cx="12" cy="12" r="3"/></svg>API 设置
       </button>
       <button onclick="openTagSettings()" style="font-size:12px;" class="filter-btn">
@@ -324,7 +324,7 @@
           重置
         </button>
         <div style="flex:1;"></div>
-        <button onclick="openExportPanel()" style="font-size:12px;flex-shrink:0;" class="filter-btn">
+        <button onclick="quickExport()" style="font-size:12px;flex-shrink:0;" class="filter-btn">
           <svg style="width:13px;height:13px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>导出数据
         </button>
       </div>
@@ -1682,6 +1682,61 @@ function _closePanel(maskId,panelId) {
 // ===== 导出面板 =====
 let _expType='excel', _expRange='all', _expAllSelected=true;
 
+function quickExport() {
+  toast('Excel 数据文件已加入下载列表');
+}
+
+function openApiPanel() {
+  const exist=document.getElementById('exportModal');
+  if(exist){exist.remove();return;}
+  const modal=document.createElement('div');
+  modal.id='exportModal';
+  modal.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.3);z-index:700;display:flex;align-items:center;justify-content:center;';
+  modal.innerHTML=`
+  <div style="background:#fff;border-radius:14px;width:460px;box-shadow:0 16px 48px rgba(0,0,0,.15);overflow:hidden;" onclick="event.stopPropagation()">
+    <div style="padding:20px 24px 16px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #f0f0f0;">
+      <div style="font-size:15px;font-weight:700;color:#1a1a1a;">API 设置</div>
+      <button onclick="document.getElementById('exportModal').remove()" style="color:#aaa;cursor:pointer;font-size:20px;line-height:1;background:none;border:none;">×</button>
+    </div>
+    <div style="padding:4px 24px 20px;">
+      <div style="display:flex;flex-direction:column;border:1px solid #e5e7eb;border-radius:10px;overflow:hidden;">
+        <div style="display:flex;align-items:center;padding:13px 16px;border-bottom:1px solid #f0f0f0;">
+          <span style="font-size:12px;color:#888;width:140px;flex-shrink:0;">数据推送示例</span>
+          <span style="font-size:12px;color:#3b82f6;cursor:pointer;" onclick="toast('开始下载示例文件…')">下载查看</span>
+        </div>
+        <div style="display:flex;align-items:center;padding:13px 16px;border-bottom:1px solid #f0f0f0;">
+          <span style="font-size:12px;color:#888;width:140px;flex-shrink:0;">API Token</span>
+          <span id="exp-token-val" style="font-size:12px;color:#333;flex:1;letter-spacing:.05em;">••••••••••••••</span>
+          <span style="display:flex;gap:8px;">
+            <span onclick="toggleApiToken()" style="font-size:12px;color:#3b82f6;cursor:pointer;">查看</span>
+            <span style="color:#e5e7eb;">|</span>
+            <span onclick="navigator.clipboard&&navigator.clipboard.writeText('${_fakeToken}').then(()=>toast('Token 已复制'))" style="font-size:12px;color:#3b82f6;cursor:pointer;">复制</span>
+          </span>
+        </div>
+        <div style="display:flex;align-items:center;padding:13px 16px;">
+          <span style="font-size:12px;color:#888;width:140px;flex-shrink:0;">Post 消息接收地址</span>
+          <input id="exp-webhook-input" type="text" placeholder="请输入接收地址" value="${_webhookUrl||''}"
+            style="flex:1;font-size:12px;border:1px solid #e5e7eb;border-radius:6px;padding:5px 8px;outline:none;color:#333;"
+            onchange="_webhookUrl=this.value">
+        </div>
+      </div>
+      <div style="margin-top:14px;display:flex;justify-content:flex-end;gap:8px;">
+        <button onclick="document.getElementById('exportModal').remove()" style="font-size:12px;padding:7px 16px;border-radius:8px;border:1px solid #e5e7eb;background:#fff;color:#555;cursor:pointer;">取消</button>
+        <button onclick="saveApiSettings()" style="font-size:12px;padding:7px 16px;border-radius:8px;border:none;background:#1a1a1a;color:#fff;cursor:pointer;font-weight:600;">保存</button>
+      </div>
+    </div>
+  </div>`;
+  modal.onclick=()=>modal.remove();
+  document.body.appendChild(modal);
+}
+
+function saveApiSettings(){
+  const v=document.getElementById('exp-webhook-input');
+  if(v) _webhookUrl=v.value;
+  toast('API 设置已保存');
+  document.getElementById('exportModal').remove();
+}
+
 function openExportPanel() {
   const exist=document.getElementById('exportModal');
   if(exist){exist.remove();return;}
@@ -1964,6 +2019,7 @@ function selectExportRange(v){
 
 let _tokenVisible=false;
 const _fakeToken='sk-xhs-leads-a8f2c3d9e1b4';
+let _webhookUrl='www.baidu.com1234';
 function toggleApiToken(){
   _tokenVisible=!_tokenVisible;
   const el=document.getElementById('exp-token-val');
