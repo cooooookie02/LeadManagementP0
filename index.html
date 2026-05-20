@@ -1728,7 +1728,7 @@ function openExportPanel() {
               <div style="width:15px;height:15px;border-radius:50%;border:2px solid #1a1a1a;background:#1a1a1a;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;" id="exp-rdot-all"><div style="width:5px;height:5px;border-radius:50%;background:#fff;"></div></div>
               <div>
                 <div style="font-size:12px;font-weight:600;color:#1a1a1a;">当前筛选结果</div>
-                <div style="font-size:11px;color:#aaa;margin-top:2px;">导出列表筛选条件下的全部数据</div>
+                <div style="font-size:11px;color:#aaa;margin-top:2px;">导出列表当前筛选条件下的全部数据</div>
                 <div style="margin-top:6px;"><span onclick="goToFilter()" style="font-size:11px;color:#18a058;cursor:pointer;text-decoration:underline;text-underline-offset:2px;">去筛选 →</span></div>
               </div>
             </div>
@@ -1736,8 +1736,8 @@ function openExportPanel() {
               style="flex:1;border:1.5px solid #e5e7eb;border-radius:9px;padding:10px 12px;cursor:pointer;display:flex;align-items:flex-start;gap:8px;">
               <div style="width:15px;height:15px;border-radius:50%;border:2px solid #d1d5db;background:#fff;flex-shrink:0;margin-top:2px;" id="exp-rdot-sel"></div>
               <div>
-                <div style="font-size:12px;font-weight:600;color:#1a1a1a;">已勾选数据</div>
-                <div style="font-size:11px;color:#aaa;margin-top:2px;">仅导出列表中手动勾选的客户（<span id="exp-sel-count">${selectedRows.size}</span> 条）</div>
+                <div style="font-size:12px;font-weight:600;color:#1a1a1a;">全部数据（近30天）</div>
+                <div style="font-size:11px;color:#aaa;margin-top:2px;">导出近30天内所有进线客户数据</div>
               </div>
             </div>
           </div>
@@ -1994,7 +1994,7 @@ function doExport(){
   }
   const fields=Array.from(document.querySelectorAll('._exp-field-tag._exp-selected')).map(el=>el.dataset.field);
   if(!fields.length){toast('请至少选择一个导出字段');return;}
-  const rangeText=_expRange==='sel'?`已勾选 ${selectedRows.size} 条`:'当前筛选全部数据';
+  const rangeText=_expRange==='sel'?'全部数据（近30天）':'当前筛选结果';
   toast(`导出任务已生成（${rangeText}），请稍后在「下载中心」查收`);
   document.getElementById('exportModal').remove();
 }
