@@ -58,6 +58,61 @@
   ._quick-btn:hover { background:#f3f4f6;border-color:#d1d5db; }
   .filter-btn { border:1px solid #e5e7eb; border-radius:8px; padding:6px 12px; font-size:12px; background:#fff; color:#555; cursor:pointer; display:flex; align-items:center; gap:4px; }
   .filter-btn:hover { background:#f5f5f5; }
+
+  /* 通用筛选项包装：select / combobox / 文本输入框，统一支持右侧 × 清除 */
+  .filter-wrap { position:relative; display:inline-flex; align-items:center; }
+  .filter-wrap .filter-select,
+  .filter-wrap .filter-input { padding-right:24px; }
+  .filter-wrap .clear-x {
+    position:absolute; right:6px; top:50%; transform:translateY(-50%);
+    width:14px; height:14px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    background:#d1d5db; color:#fff; font-size:10px; line-height:1;
+    cursor:pointer; user-select:none; opacity:0; pointer-events:none;
+    transition:opacity .15s, background .15s;
+  }
+  .filter-wrap.has-value .clear-x { opacity:1; pointer-events:auto; }
+  .filter-wrap .clear-x:hover { background:#9ca3af; }
+
+  /* combobox 下拉 */
+  .combo-box { position:relative; display:inline-block; }
+  .combo-input {
+    border:1px solid #e5e7eb; border-radius:8px; padding:6px 28px 6px 10px;
+    font-size:12px; background:#fff; color:#333; outline:none;
+    min-width:160px; cursor:text;
+  }
+  .combo-input:focus { border-color:#18a058; }
+  .combo-input::placeholder { color:#aaa; }
+  .combo-arrow {
+    position:absolute; right:6px; top:50%; transform:translateY(-50%);
+    width:12px; height:12px; pointer-events:none; color:#aaa;
+  }
+  .combo-box.has-value .combo-arrow { display:none; }
+  .combo-box .clear-x {
+    position:absolute; right:6px; top:50%; transform:translateY(-50%);
+    width:14px; height:14px; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    background:#d1d5db; color:#fff; font-size:10px; line-height:1;
+    cursor:pointer; user-select:none; opacity:0; pointer-events:none;
+    transition:opacity .15s, background .15s; z-index:2;
+  }
+  .combo-box.has-value .clear-x { opacity:1; pointer-events:auto; }
+  .combo-panel {
+    display:none; position:absolute; top:calc(100% + 4px); left:0;
+    background:#fff; border:1px solid #e5e7eb; border-radius:8px;
+    box-shadow:0 6px 20px rgba(0,0,0,.08);
+    min-width:100%; max-height:240px; overflow-y:auto; z-index:200;
+    padding:4px 0;
+  }
+  .combo-box.open .combo-panel { display:block; }
+  .combo-opt {
+    padding:7px 12px; font-size:12px; color:#333; cursor:pointer;
+    display:flex; align-items:center; gap:6px; white-space:nowrap;
+  }
+  .combo-opt:hover { background:#f5f5f5; }
+  .combo-opt.selected { color:#18a058; }
+  .combo-opt .check { width:12px; height:12px; flex-shrink:0; }
+  .combo-empty { padding:12px; text-align:center; font-size:12px; color:#bbb; }
   
   .card-date-sel { font-size:11px; color:#888; border:1px solid #e5e7eb; border-radius:6px; padding:2px 4px; background:#fff; cursor:pointer; outline:none; }
   .def-tip { font-size:11px; color:#aaa; cursor:default; margin-left:3px; position:relative; }
@@ -266,10 +321,13 @@
         <!-- ============ 客户视图筛选项 ============ -->
         <div id="customerFilters" style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;flex:1;min-width:0;">
         <!-- 客户行为 -->
-        <select class="filter-select" id="fs-behavior" onchange="renderList()">
-          <option value="">全部客户行为</option>
-          <option>进线</option><option>开口</option><option>留资</option><option>评论</option><option>关注</option>
-        </select>
+        <span class="filter-wrap">
+          <select class="filter-select" id="fs-behavior" onchange="onSelectFilterChange(this,renderList)">
+            <option value="">客户行为     </option>
+            <option>进线</option><option>开口</option><option>留资</option><option>评论</option><option>关注</option>
+          </select>
+          <span class="clear-x" onclick="clearSelectFilter('fs-behavior',renderList)">×</span>
+        </span>
         <!-- 行为时间 -->
         <div style="position:relative;display:inline-block;" id="datePickerWrap">
           <button id="datePickerTrigger" onclick="toggleDatePicker(event)" class="filter-select" style="min-width:110px;display:flex;align-items:center;gap:6px;cursor:pointer;background:#fff;text-align:left;white-space:nowrap;">
@@ -298,13 +356,19 @@
         <input type="hidden" id="fs-date-s">
         <input type="hidden" id="fs-date-e">
         <!-- 客户标签 -->
-        <select class="filter-select" id="fs-tag" onchange="renderList()">
-          <option value="">全部客户标签</option>
-          <option>进线阶段</option><option>开口阶段</option><option>潜客阶段</option><option>留资完成</option><option>转化完成</option>
-          <option>高意向未成交</option><option>KOS转介绍</option><option>已到店</option><option>VIP客户</option>
-        </select>
+        <span class="filter-wrap">
+          <select class="filter-select" id="fs-tag" onchange="onSelectFilterChange(this,renderList)">
+            <option value="">客户标签     </option>
+            <option>进线阶段</option><option>开口阶段</option><option>潜客阶段</option><option>留资完成</option><option>转化完成</option>
+            <option>高意向未成交</option><option>KOS转介绍</option><option>已到店</option><option>VIP客户</option>
+          </select>
+          <span class="clear-x" onclick="clearSelectFilter('fs-tag',renderList)">×</span>
+        </span>
         <!-- 搜索框 -->
-        <input class="filter-input" id="fs-search" placeholder="搜索用户名称/手机号/ID" style="max-width:210px;">
+        <span class="filter-wrap" style="max-width:230px;flex:1;">
+          <input class="filter-input" id="fs-search" placeholder="搜索用户名称/手机号/ID" style="max-width:230px;" oninput="onTextFilterInput(this,renderList)">
+          <span class="clear-x" onclick="clearTextFilter('fs-search',renderList)">×</span>
+        </span>
         <!-- 更多筛选 -->
         <button class="filter-btn" onclick="toggleMoreFilter(this)">
           <svg style="width:12px;height:12px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2a1 1 0 01-.293.707L13 13.414V19a1 1 0 01-.553.894l-4 2A1 1 0 017 21v-7.586L3.293 6.707A1 1 0 013 6V4z"></path></svg>
@@ -318,22 +382,28 @@
         <!-- ============ 线索视图筛选项 ============ -->
         <div id="leadFilters" style="display:none;gap:8px;flex-wrap:wrap;align-items:center;flex:1;min-width:0;">
           <!-- 流量类型 -->
-          <select class="filter-select" id="lv-traffic" onchange="renderLeadList()">
-            <option value="">流量类型 全部</option>
-            <option>广告流量</option>
-            <option>自然流量</option>
-          </select>
+          <span class="filter-wrap">
+            <select class="filter-select" id="lv-traffic" onchange="onSelectFilterChange(this,renderLeadList)">
+              <option value="">流量类型     </option>
+              <option>广告流量</option>
+              <option>自然流量</option>
+            </select>
+            <span class="clear-x" onclick="clearSelectFilter('lv-traffic',renderLeadList)">×</span>
+          </span>
           <!-- 转化方式 -->
-          <select class="filter-select" id="lv-convert" onchange="renderLeadList()">
-            <option value="">转化方式 全部</option>
-            <option>私信留资</option>
-            <option>预约组件</option>
-            <option>名片-企微</option>
-            <option>服务卡</option>
-            <option>落地页</option>
-            <option>落地页-直播间</option>
-            <option>直播间-企微</option>
-          </select>
+          <span class="filter-wrap">
+            <select class="filter-select" id="lv-convert" onchange="onSelectFilterChange(this,renderLeadList)">
+              <option value="">转化方式     </option>
+              <option>私信留资</option>
+              <option>预约组件</option>
+              <option>名片-企微</option>
+              <option>服务卡</option>
+              <option>落地页</option>
+              <option>落地页-直播间</option>
+              <option>直播间-企微</option>
+            </select>
+            <span class="clear-x" onclick="clearSelectFilter('lv-convert',renderLeadList)">×</span>
+          </span>
           <!-- 生成时间 -->
           <div style="display:flex;align-items:center;gap:6px;font-size:12px;color:#555;border:1px solid #e5e7eb;border-radius:8px;padding:6px 10px;background:#fff;">
             <svg style="width:13px;height:13px;color:#aaa;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
@@ -367,58 +437,83 @@
       <!-- 客户视图：更多筛选展开区 -->
       <div id="moreFilterRow" style="display:none;align-items:center;gap:8px;flex-wrap:wrap;padding-top:4px;">
         <span style="font-size:12px;color:#888;white-space:nowrap;">更多筛选：</span>
-        <select class="filter-select" id="mf-convert" onchange="renderList()">
-          <option value="">全部转化结果</option>
-          <option>预约</option><option>成交</option><option>未填写</option>
-        </select>
-        <select class="filter-select" id="mf-account" onchange="renderList()">
-          <option value="">全部归属账号</option>
-          <option>薯店-小红书</option><option>薯店-广告</option>
-        </select>
-        <select class="filter-select" id="mf-interacttype" onchange="renderList()">
-          <option value="">全部互动类型</option>
-          <option>评论</option><option>关注</option>
-        </select>
-        <select class="filter-select" id="mf-leadsource" onchange="renderList()">
-          <option value="">全部线索来源</option>
-          <option>笔记：小红书考研全程规划指南</option>
-          <option>直播间：5月冲刺班限时报名直播</option>
-          <option>直播间：暑期集训营招生专场</option>
-          <option>直播间：名师公开课免费试听专场</option>
-        </select>
-        <select class="filter-select" id="mf-leadtype" onchange="renderList()">
-          <option value="">全部留资方式</option>
-          <option>私信留资</option><option>客服打标</option><option>留资卡</option><option>企微名片</option><option>落地页</option><option>预约组件</option><option>个微名片</option><option>交易卡</option><option>落地页_直播间</option>
-        </select>
+        <span class="filter-wrap">
+          <select class="filter-select" id="mf-convert" onchange="onSelectFilterChange(this,renderList)">
+            <option value="">转化结果     </option>
+            <option>预约</option><option>成交</option><option>未填写</option>
+          </select>
+          <span class="clear-x" onclick="clearSelectFilter('mf-convert',renderList)">×</span>
+        </span>
+        <span class="filter-wrap">
+          <select class="filter-select" id="mf-account" onchange="onSelectFilterChange(this,renderList)">
+            <option value="">归属账号     </option>
+            <option>薯店-小红书</option><option>薯店-广告</option>
+          </select>
+          <span class="clear-x" onclick="clearSelectFilter('mf-account',renderList)">×</span>
+        </span>
+        <span class="filter-wrap">
+          <select class="filter-select" id="mf-interacttype" onchange="onSelectFilterChange(this,renderList)">
+            <option value="">互动类型     </option>
+            <option>评论</option><option>关注</option>
+          </select>
+          <span class="clear-x" onclick="clearSelectFilter('mf-interacttype',renderList)">×</span>
+        </span>
+        <span class="filter-wrap">
+          <select class="filter-select" id="mf-leadsource" onchange="onSelectFilterChange(this,renderList)">
+            <option value="">线索来源     </option>
+            <option>笔记：小红书考研全程规划指南</option>
+            <option>直播间：5月冲刺班限时报名直播</option>
+            <option>直播间：暑期集训营招生专场</option>
+            <option>直播间：名师公开课免费试听专场</option>
+          </select>
+          <span class="clear-x" onclick="clearSelectFilter('mf-leadsource',renderList)">×</span>
+        </span>
+        <span class="filter-wrap">
+          <select class="filter-select" id="mf-leadtype" onchange="onSelectFilterChange(this,renderList)">
+            <option value="">留资方式     </option>
+            <option>私信留资</option><option>客服打标</option><option>留资卡</option><option>企微名片</option><option>落地页</option><option>预约组件</option><option>个微名片</option><option>交易卡</option><option>落地页_直播间</option>
+          </select>
+          <span class="clear-x" onclick="clearSelectFilter('mf-leadtype',renderList)">×</span>
+        </span>
       </div>
       <!-- 线索视图：更多筛选展开区 -->
       <div id="leadMoreFilterRow" style="display:none;align-items:center;gap:8px;flex-wrap:wrap;padding-top:4px;">
         <span style="font-size:12px;color:#888;white-space:nowrap;">更多筛选：</span>
         <!-- 用户信息 -->
-        <div style="display:flex;align-items:center;gap:4px;border:1px solid #e5e7eb;border-radius:8px;padding:5px 10px;background:#fff;">
-          <span style="font-size:12px;color:#888;white-space:nowrap;">用户信息</span>
-          <input class="filter-input" id="lv-uid" placeholder="请输入用户UID" style="border:none;outline:none;padding:0 0 0 4px;min-width:140px;max-width:180px;font-size:12px;">
-        </div>
+        <span class="filter-wrap">
+          <input class="filter-input" id="lv-uid" placeholder="用户UID    " style="min-width:160px;max-width:200px;" oninput="onTextFilterInput(this,renderLeadList)">
+          <span class="clear-x" onclick="clearTextFilter('lv-uid',renderLeadList)">×</span>
+        </span>
         <!-- 来源载体 -->
-        <select class="filter-select" id="lv-source-media" onchange="renderLeadList()">
-          <option value="">来源载体 全部</option>
-          <option>笔记</option>
-          <option>直播间</option>
-        </select>
-        <!-- 归属账号 -->
-        <select class="filter-select" id="lv-account" onchange="renderLeadList()">
-          <option value="">归属账号 不限</option>
-          <option>薯店-小红书</option>
-          <option>薯店-广告</option>
-        </select>
-        <!-- 创意 -->
-        <select class="filter-select" id="lv-creative" onchange="renderLeadList()">
-          <option value="">创意 不限</option>
-          <option>小红书考下来全程规划指南</option>
-          <option>5月冲刺班限时报名直播</option>
-          <option>暴期集训营招生专场</option>
-          <option>名师公开课免费试听专场</option>
-        </select>
+        <span class="filter-wrap">
+          <select class="filter-select" id="lv-source-media" onchange="onSelectFilterChange(this,renderLeadList)">
+            <option value="">来源载体     </option>
+            <option>笔记</option>
+            <option>直播间</option>
+          </select>
+          <span class="clear-x" onclick="clearSelectFilter('lv-source-media',renderLeadList)">×</span>
+        </span>
+        <!-- 归属账号（可搜索下拉） -->
+        <span id="combo-lv-account" class="combo-box" data-render="renderLeadList" data-placeholder="归属账号     ">
+          <input class="combo-input" placeholder="归属账号     " readonly>
+          <svg class="combo-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          <span class="clear-x" onclick="clearCombo('combo-lv-account',event)">×</span>
+          <div class="combo-panel"></div>
+        </span>
+        <!-- 投放账号（可搜索下拉） -->
+        <span id="combo-lv-adaccount" class="combo-box" data-render="renderLeadList" data-placeholder="投放账号     ">
+          <input class="combo-input" placeholder="投放账号     " readonly>
+          <svg class="combo-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          <span class="clear-x" onclick="clearCombo('combo-lv-adaccount',event)">×</span>
+          <div class="combo-panel"></div>
+        </span>
+        <!-- 创意ID（可搜索下拉） -->
+        <span id="combo-lv-creative" class="combo-box" data-render="renderLeadList" data-placeholder="创意ID     ">
+          <input class="combo-input" placeholder="创意ID     " readonly>
+          <svg class="combo-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+          <span class="clear-x" onclick="clearCombo('combo-lv-creative',event)">×</span>
+          <div class="combo-panel"></div>
+        </span>
       </div>
     </div>
 
@@ -743,8 +838,8 @@
     <div id="leadView" style="display: none; margin-bottom: 12px;">
       <!-- 表格 -->
       <div style="background:#fff;border-radius:10px;overflow:hidden;">
-        <div style="overflow-x:auto;"><div style="min-width:3200px;">
-          <div class="table-header" id="leadTableHeader" style="grid-template-columns:1.4fr 1.2fr 1.5fr 1.1fr 1.4fr 1.4fr 1.4fr 1.4fr 0.9fr 1.1fr 1.2fr 1fr 1.2fr 1.4fr 1.2fr 1.4fr 1.2fr 1.4fr 0.7fr;">
+        <div style="overflow-x:auto;"><div style="min-width:3360px;">
+          <div class="table-header" id="leadTableHeader" style="grid-template-columns:1.4fr 1.2fr 1.5fr 1.1fr 1.4fr 1.4fr 1.4fr 1.4fr 0.9fr 1.1fr 1.2fr 1fr 1.2fr 1.2fr 1.4fr 1.2fr 1.4fr 1.2fr 1.4fr 0.7fr;">
             <div>用户昵称</div>
             <div>用户ID</div>
             <div>线索生成时间</div>
@@ -756,6 +851,7 @@
             <div>流量类型</div>
             <div>转化方式</div>
             <div>手机号</div>
+            <div>投放账号</div>
             <div>微信号</div>
             <div>广告计划</div>
             <div>广告计划id</div>
@@ -2640,6 +2736,7 @@ function resetFilter() {
   _calPickStart=null;_calPickEnd=null;
   _updateDateTriggerLabel(null);
   ['mf-convert','mf-account','mf-interacttype','mf-leadtype','mf-leadsource'].forEach(id=>{ const el=document.getElementById(id); if(el) el.value=''; });
+  _refreshAllFilterWraps();
   renderList();
 }
 
@@ -2650,12 +2747,180 @@ function resetLeadFilter() {
   const ds=document.getElementById('lv-date-s'); if(ds) ds.value='';
   const de=document.getElementById('lv-date-e'); if(de) de.value='';
   // 更多筛选
-  ['lv-uid','lv-source-media','lv-account','lv-creative'].forEach(id=>{
+  ['lv-uid','lv-source-media'].forEach(id=>{
     const el=document.getElementById(id);
-    if(el) { if(el.tagName==='INPUT') el.value=''; else el.value=''; }
+    if(el) el.value='';
   });
+  // combo 重置
+  ['combo-lv-account','combo-lv-adaccount','combo-lv-creative'].forEach(id=>{
+    const box=document.getElementById(id); if(!box) return;
+    box.dataset.value='';
+    const inp=box.querySelector('.combo-input'); if(inp) inp.value='';
+    box.classList.remove('has-value');
+  });
+  _refreshAllFilterWraps();
   if (typeof renderLeadList === 'function') renderLeadList();
 }
+
+// ============ 通用筛选项 helpers (×清除 + combobox) ============
+function _refreshFilterWrap(el) {
+  const wrap = el.closest('.filter-wrap');
+  if (!wrap) return;
+  const v = (el.value || '').trim();
+  wrap.classList.toggle('has-value', !!v);
+}
+function _refreshAllFilterWraps() {
+  document.querySelectorAll('.filter-wrap').forEach(w=>{
+    const el = w.querySelector('select, input');
+    if (el) _refreshFilterWrap(el);
+  });
+}
+function onSelectFilterChange(el, renderFn) {
+  _refreshFilterWrap(el);
+  if (typeof renderFn === 'function') renderFn();
+}
+function onTextFilterInput(el, renderFn) {
+  _refreshFilterWrap(el);
+  if (typeof renderFn === 'function') renderFn();
+}
+function clearSelectFilter(id, renderFn) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.value = '';
+  _refreshFilterWrap(el);
+  if (typeof renderFn === 'function') renderFn();
+}
+function clearTextFilter(id, renderFn) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.value = '';
+  _refreshFilterWrap(el);
+  if (typeof renderFn === 'function') renderFn();
+}
+
+// ============ 可搜索下拉 (combobox) ============
+const COMBO_OPTIONS = {
+  'combo-lv-account':  ['薯店-小红书','薯店-广告','测试名字','京东种草聚光测试01'],
+  'combo-lv-adaccount':['测试名字','京东种草聚光测试01','京东种草聚光测试02','Xxxx22'],
+  'combo-lv-creative': [
+    {label:'夏日出行专题创意', value:'4219856085'},
+    {label:'你戴了几张社交面具？', value:'cr_0012345'},
+    {label:'暑期集训直播创意', value:'cr_0012902'},
+    {label:'5月冲刺班限时报名直播', value:'cr_0013010'},
+    {label:'名师公开课免费试听专场', value:'cr_0013022'},
+  ],
+};
+let _comboOpenId = null;
+function _comboGetItems(id) {
+  return (COMBO_OPTIONS[id]||[]).map(o => typeof o === 'string' ? {label:o, value:o} : o);
+}
+function _renderComboPanel(boxId, query) {
+  const box = document.getElementById(boxId);
+  if (!box) return;
+  const panel = box.querySelector('.combo-panel');
+  const items = _comboGetItems(boxId);
+  const q = (query||'').trim().toLowerCase();
+  const filtered = q ? items.filter(it => it.label.toLowerCase().includes(q) || it.value.toLowerCase().includes(q)) : items;
+  const cur = box.dataset.value || '';
+  if (!filtered.length) {
+    panel.innerHTML = '<div class="combo-empty">无匹配项</div>';
+    return;
+  }
+  panel.innerHTML = filtered.map(it => {
+    const sel = it.value === cur;
+    return `<div class="combo-opt${sel?' selected':''}" onclick="_comboPick('${boxId}','${it.value.replace(/'/g,"\\'")}')">
+      <span style="flex:1;">${it.label}</span>
+      ${sel?'<svg class="check" fill="currentColor" viewBox="0 0 20 20"><path d="M16.7 5.3a1 1 0 010 1.4l-8 8a1 1 0 01-1.4 0l-4-4a1 1 0 011.4-1.4L8 12.6l7.3-7.3a1 1 0 011.4 0z"/></svg>':''}
+    </div>`;
+  }).join('');
+}
+function _comboPick(boxId, value) {
+  const box = document.getElementById(boxId);
+  if (!box) return;
+  const items = _comboGetItems(boxId);
+  const it = items.find(x=>x.value===value);
+  box.dataset.value = value;
+  const inp = box.querySelector('.combo-input');
+  if (inp) inp.value = it ? it.label : value;
+  box.classList.add('has-value');
+  box.classList.remove('open');
+  _comboOpenId = null;
+  const renderName = box.dataset.render;
+  if (renderName && typeof window[renderName] === 'function') window[renderName]();
+}
+function _comboToggle(boxId) {
+  const box = document.getElementById(boxId);
+  if (!box) return;
+  // close others
+  document.querySelectorAll('.combo-box.open').forEach(b => { if (b.id !== boxId) b.classList.remove('open'); });
+  if (box.classList.contains('open')) {
+    box.classList.remove('open');
+    _comboOpenId = null;
+    return;
+  }
+  // open + make searchable
+  const inp = box.querySelector('.combo-input');
+  if (inp) {
+    inp.removeAttribute('readonly');
+    const cur = box.dataset.value || '';
+    const items = _comboGetItems(boxId);
+    const curIt = items.find(x=>x.value===cur);
+    inp.value = curIt ? curIt.label : (inp.value || '');
+    inp.focus();
+    inp.select();
+  }
+  _renderComboPanel(boxId, '');
+  box.classList.add('open');
+  _comboOpenId = boxId;
+}
+function clearCombo(boxId, ev) {
+  if (ev) { ev.stopPropagation(); ev.preventDefault(); }
+  const box = document.getElementById(boxId);
+  if (!box) return;
+  box.dataset.value = '';
+  const inp = box.querySelector('.combo-input');
+  if (inp) { inp.value=''; inp.setAttribute('readonly','readonly'); }
+  box.classList.remove('has-value','open');
+  _comboOpenId = null;
+  const renderName = box.dataset.render;
+  if (renderName && typeof window[renderName] === 'function') window[renderName]();
+}
+
+// 全局事件 bind: 输入框聚焦时打开 + 搜索过滤；外部点击关闭
+document.addEventListener('click', function(e){
+  // 如果点击在某个 combo-box 内，由该 box 自己处理
+  document.querySelectorAll('.combo-box.open').forEach(box=>{
+    if (!box.contains(e.target)) {
+      box.classList.remove('open');
+      const inp = box.querySelector('.combo-input');
+      if (inp) {
+        const cur = box.dataset.value || '';
+        const items = _comboGetItems(box.id);
+        const it = items.find(x=>x.value===cur);
+        inp.value = it ? it.label : '';
+        inp.setAttribute('readonly','readonly');
+      }
+      _comboOpenId = null;
+    }
+  });
+}, true);
+// click on input opens combo
+document.addEventListener('click', function(e){
+  const inp = e.target.closest('.combo-input');
+  if (!inp) return;
+  const box = inp.closest('.combo-box');
+  if (!box) return;
+  e.stopPropagation();
+  _comboToggle(box.id);
+});
+// search-as-you-type
+document.addEventListener('input', function(e){
+  const inp = e.target.closest('.combo-input');
+  if (!inp) return;
+  const box = inp.closest('.combo-box');
+  if (!box) return;
+  _renderComboPanel(box.id, inp.value);
+});
 
 // ===== Skill 跳转弹窗 =====
 function openSkillToast(type) {
@@ -3233,7 +3498,7 @@ const LEAD_DATA = [
     genTime:'2026-05-20 16:10:00', account:'测试名字',
     srcNote:'-', noteId:'-', srcLive:'-', liveId:'-',
     trafficType:'自然流量', convertType:'私信留资', phone:'138****0001', wechat:'-',
-    adPlan:'-', adPlanId:'-', adUnit:'-', adUnitId:'-', adCreative:'-', adCreativeId:'-',
+    adAccount:'-', adPlan:'-', adPlanId:'-', adUnit:'-', adUnitId:'-', adCreative:'-', adCreativeId:'-',
     convertDesc:'用户在私信中提交手机号',
     region:'上海', remark:'对课程很感兴趣，周五回访',
     hostAccount:'kefu_001', hostId:'88001', hostName:'王小客', hostRegion:'上海', hostTag:'高潜成交' },
@@ -3243,7 +3508,7 @@ const LEAD_DATA = [
     genTime:'2026-05-14 14:48:40', account:'测试名字',
     srcNote:'-', noteId:'-', srcLive:'-', liveId:'-',
     trafficType:'自然流量', convertType:'预约组件', phone:'139****0002', wechat:'-',
-    adPlan:'-', adPlanId:'-', adUnit:'-', adUnitId:'-', adCreative:'-', adCreativeId:'-',
+    adAccount:'-', adPlan:'-', adPlanId:'-', adUnit:'-', adUnitId:'-', adCreative:'-', adCreativeId:'-',
     convertDesc:'用户在私信中点击预约组件并填写信息',
     hostAccount:'kefu_002', hostId:'88002', hostName:'李客服', hostRegion:'北京', hostTag:'留资完成' },
 
@@ -3252,7 +3517,7 @@ const LEAD_DATA = [
     genTime:'2026-05-09 15:37:34', account:'测试名字',
     srcNote:'-', noteId:'-', srcLive:'-', liveId:'-',
     trafficType:'自然流量', convertType:'名片-企微', phone:'137****0003', wechat:'wxid_user003',
-    adPlan:'-', adPlanId:'-', adUnit:'-', adUnitId:'-', adCreative:'-', adCreativeId:'-',
+    adAccount:'-', adPlan:'-', adPlanId:'-', adUnit:'-', adUnitId:'-', adCreative:'-', adCreativeId:'-',
     convertDesc:'用户通过个微名片复制企业微信',
     qiweiLinkName:'5月品牌活动获客链接', qiweiLinkId:'qw_link_5523',
     hostAccount:'kefu_003', hostId:'88003', hostName:'赵企微', hostRegion:'广州', hostTag:'转化完成' },
@@ -3262,7 +3527,7 @@ const LEAD_DATA = [
     genTime:'2026-05-08 18:02:19', account:'测试名字',
     srcNote:'-', noteId:'-', srcLive:'-', liveId:'-',
     trafficType:'自然流量', convertType:'服务卡', phone:'136****0004', wechat:'-',
-    adPlan:'-', adPlanId:'-', adUnit:'-', adUnitId:'-', adCreative:'-', adCreativeId:'-',
+    adAccount:'-', adPlan:'-', adPlanId:'-', adUnit:'-', adUnitId:'-', adCreative:'-', adCreativeId:'-',
     convertDesc:'用户提交服务卡表单',
     serviceCardName:'肌肤检测预约卡', serviceCardId:'svc_70021', serviceCardOther:'到店时段：周末',
     hostAccount:'kefu_004', hostId:'88004', hostName:'孙顾问', hostRegion:'深圳', hostTag:'潜客阶段' },
@@ -3272,7 +3537,7 @@ const LEAD_DATA = [
     genTime:'2026-05-08 16:16:24', account:'测试名字',
     srcNote:'夏日出行清单 ✈️', noteId:'note_61882', srcLive:'-', liveId:'-',
     trafficType:'广告流量', convertType:'落地页', phone:'135****0005', wechat:'-',
-    adPlan:'5月品宣计划', adPlanId:'183630346',
+    adAccount:'京东种草聚光测试01', adPlan:'5月品宣计划', adPlanId:'183630346',
     adUnit:'品宣-高潜单元', adUnitId:'574218819',
     adCreative:'夏日出行专题创意', adCreativeId:'4219856085',
     convertDesc:'用户在落地页提交表单',
@@ -3286,7 +3551,7 @@ const LEAD_DATA = [
     srcNote:'你戴了几张社交面具？', noteId:'note_71045',
     srcLive:'5月名师公开课直播专场', liveId:'live_88210',
     trafficType:'广告流量', convertType:'落地页-直播间', phone:'133****0006', wechat:'-',
-    adPlan:'公开课引流计划', adPlanId:'183630412',
+    adAccount:'京东种草聚光测试02', adPlan:'公开课引流计划', adPlanId:'183630412',
     adUnit:'公开课-直播预热', adUnitId:'574218921',
     adCreative:'你戴了几张社交面具？', adCreativeId:'cr_0012345',
     sourceCardName:'落地页-直播间引流卡', sourceCardId:'card_lp_live_551',
@@ -3298,7 +3563,7 @@ const LEAD_DATA = [
     srcNote:'-', noteId:'-',
     srcLive:'4月暑期集训招生直播', liveId:'live_77108',
     trafficType:'广告流量', convertType:'直播间-企微', phone:'131****0007', wechat:'wxid_qiwei_07',
-    adPlan:'4月暑期招生计划', adPlanId:'183620115',
+    adAccount:'京东种草聚光测试01', adPlan:'4月暑期招生计划', adPlanId:'183620115',
     adUnit:'集训营-企微承接', adUnitId:'574200612',
     adCreative:'暑期集训直播创意', adCreativeId:'cr_0012902',
     sourceCardName:'直播间企微名片卡', sourceCardId:'card_live_qw_220',
@@ -3310,17 +3575,19 @@ function renderLeadList() {
   if (!container) return;
   const trafficFilter = (document.getElementById('lv-traffic')||{}).value || '';
   const convertFilter = (document.getElementById('lv-convert')||{}).value || '';
-  const accountFilter = (document.getElementById('lv-account')||{}).value || '';
+  const accountFilter = ((document.getElementById('combo-lv-account')||{}).dataset||{}).value || '';
+  const adAccountFilter = ((document.getElementById('combo-lv-adaccount')||{}).dataset||{}).value || '';
+  const creativeIdFilter = ((document.getElementById('combo-lv-creative')||{}).dataset||{}).value || '';
   const sourceMediaFilter = (document.getElementById('lv-source-media')||{}).value || '';
   const uidFilter = ((document.getElementById('lv-uid')||{}).value || '').trim().toLowerCase();
-  const creativeFilter = (document.getElementById('lv-creative')||{}).value || '';
 
   let rows = LEAD_DATA.filter(r => {
     if (trafficFilter && r.trafficType !== trafficFilter) return false;
     if (convertFilter && r.convertType !== convertFilter) return false;
     if (accountFilter && r.account !== accountFilter) return false;
+    if (adAccountFilter && r.adAccount !== adAccountFilter) return false;
     if (uidFilter && !r.uid.toLowerCase().includes(uidFilter) && !r.xhsId.includes(uidFilter)) return false;
-    if (creativeFilter && r.adCreative !== creativeFilter && r.adCreative !== '-') return false;
+    if (creativeIdFilter && r.adCreativeId !== creativeIdFilter) return false;
     if (sourceMediaFilter === '笔记' && r.srcNote === '-') return false;
     if (sourceMediaFilter === '直播间' && r.srcLive === '-') return false;
     return true;
@@ -3334,7 +3601,7 @@ function renderLeadList() {
     return;
   }
 
-  const colTpl = '1.4fr 1.2fr 1.5fr 1.1fr 1.4fr 1.4fr 1.4fr 1.4fr 0.9fr 1.1fr 1.2fr 1fr 1.2fr 1.4fr 1.2fr 1.4fr 1.2fr 1.4fr 0.7fr';
+  const colTpl = '1.4fr 1.2fr 1.5fr 1.1fr 1.4fr 1.4fr 1.4fr 1.4fr 0.9fr 1.1fr 1.2fr 1fr 1.2fr 1.2fr 1.4fr 1.2fr 1.4fr 1.2fr 1.4fr 0.7fr';
   const dash = '<span style="color:#ccc;">-</span>';
   const txt = v => (v && v !== '-') ? v : dash;
   const link = v => (v && v !== '-') ? `<span style="color:#1677ff;cursor:pointer;">${v}</span>` : dash;
@@ -3352,6 +3619,7 @@ function renderLeadList() {
       <div><span class="tag-pill ${r.trafficType === '广告流量' ? 'tag-blue' : 'tag-gray'}">${r.trafficType}</span></div>
       <div style="color:#555;">${r.convertType}</div>
       <div style="color:#555;">${r.phone}</div>
+      <div style="color:#555;">${txt(r.adAccount)}</div>
       <div style="color:#555;">${txt(r.wechat)}</div>
       <div style="color:#555;">${txt(r.adPlan)}</div>
       <div>${mono(r.adPlanId)}</div>
