@@ -390,17 +390,20 @@
             </select>
             <span class="clear-x" onclick="clearSelectFilter('lv-traffic',renderLeadList)">×</span>
           </span>
-          <!-- 转化方式 -->
+          <!-- 留资方式 -->
           <span class="filter-wrap">
             <select class="filter-select" id="lv-convert" onchange="onSelectFilterChange(this,renderLeadList)">
-              <option value="">转化方式     </option>
+              <option value="">留资方式     </option>
               <option>私信留资</option>
-              <option>预约组件</option>
+              <option>客服打标</option>
+              <option>留资卡</option>
               <option>名片-企微</option>
-              <option>服务卡</option>
-              <option>落地页</option>
-              <option>落地页-直播间</option>
               <option>直播间-企微</option>
+              <option>落地页</option>
+              <option>预约组件</option>
+              <option>名片-个微</option>
+              <option>交易卡</option>
+              <option>落地页-直播间</option>
             </select>
             <span class="clear-x" onclick="clearSelectFilter('lv-convert',renderLeadList)">×</span>
           </span>
@@ -471,7 +474,7 @@
         <span class="filter-wrap">
           <select class="filter-select" id="mf-leadtype" onchange="onSelectFilterChange(this,renderList)">
             <option value="">留资方式     </option>
-            <option>私信留资</option><option>客服打标</option><option>留资卡</option><option>企微名片</option><option>落地页</option><option>预约组件</option><option>个微名片</option><option>交易卡</option><option>落地页_直播间</option>
+            <option>私信留资</option><option>客服打标</option><option>留资卡</option><option>名片-企微</option><option>直播间-企微</option><option>落地页</option><option>预约组件</option><option>名片-个微</option><option>交易卡</option><option>落地页-直播间</option>
           </select>
           <span class="clear-x" onclick="clearSelectFilter('mf-leadtype',renderList)">×</span>
         </span>
@@ -849,7 +852,7 @@
             <div>来源直播间</div>
             <div>直播间id</div>
             <div>流量类型</div>
-            <div>转化方式</div>
+            <div>留资方式</div>
             <div>手机号</div>
             <div>投放账号</div>
             <div>微信号</div>
@@ -3483,12 +3486,12 @@ function toggleLeadMoreFilter(btn) {
 //  列表 18 列：xhsNick / xhsId / genTime / account / srcNote / noteId / srcLive / liveId
 //             trafficType / convertType / phone / wechat
 //             adPlan / adPlanId / adUnit / adUnitId / adCreative / adCreativeId
-//  详情扩展字段（按转化方式条件展示）：
-//   - convertDesc        转化方式说明（私信留资/预约组件/名片-企微/服务卡/落地页通用）
+//  详情扩展字段（按留资方式条件展示）：
+//   - convertDesc        留资方式说明（私信留资/预约组件/名片-企微/留资卡/落地页通用）
 //   - region             所属地区（私信留资）
 //   - remark             备注（私信留资）
 //   - qiweiLinkName/qiweiLinkId  企微获客链接名称/ID（名片-企微）
-//   - serviceCardName/serviceCardId/serviceCardOther  服务卡（服务卡）
+//   - serviceCardName/serviceCardId/serviceCardOther  留资卡（留资卡）
 //   - landingPageName/landingPageId/landingPageForm   落地页（落地页）
 //   - sourceCardName/sourceCardId/sourceCardSupp      来源卡片（落地页-直播间 / 直播间-企微）
 //   - hostAccount/hostId/hostName/hostRegion/hostTag  私信接待 5 字段（除"落地页-直播间""直播间-企微"以外都展示）
@@ -3522,13 +3525,13 @@ const LEAD_DATA = [
     qiweiLinkName:'5月品牌活动获客链接', qiweiLinkId:'qw_link_5523',
     hostAccount:'kefu_003', hostId:'88003', hostName:'赵企微', hostRegion:'广州', hostTag:'转化完成' },
 
-  // 4. 服务卡（自然流量）
+  // 4. 留资卡（自然流量）
   { xhsNick:'趙5', xhsId:'49351642779', uid:'69ae811a000000003400a114',
     genTime:'2026-05-08 18:02:19', account:'测试名字',
     srcNote:'-', noteId:'-', srcLive:'-', liveId:'-',
-    trafficType:'自然流量', convertType:'服务卡', phone:'136****0004', wechat:'-',
+    trafficType:'自然流量', convertType:'留资卡', phone:'136****0004', wechat:'-',
     adAccount:'-', adPlan:'-', adPlanId:'-', adUnit:'-', adUnitId:'-', adCreative:'-', adCreativeId:'-',
-    convertDesc:'用户提交服务卡表单',
+    convertDesc:'用户提交留资卡表单',
     serviceCardName:'肌肤检测预约卡', serviceCardId:'svc_70021', serviceCardOther:'到店时段：周末',
     hostAccount:'kefu_004', hostId:'88004', hostName:'孙顾问', hostRegion:'深圳', hostTag:'潜客阶段' },
 
@@ -3666,14 +3669,14 @@ function openLeadDetail(uid) {
   };
 
   const blocks = [
-    simpleRow('转化方式说明', r.convertDesc),
+    simpleRow('留资方式说明', r.convertDesc),
     groupRow('企微获客链接', [
       ['链接名称', r.qiweiLinkName],
       ['链接ID',   r.qiweiLinkId],
     ]),
-    groupRow('服务卡', [
-      ['服务卡名称', r.serviceCardName],
-      ['服务卡ID',   r.serviceCardId],
+    groupRow('留资卡', [
+      ['留资卡名称', r.serviceCardName],
+      ['留资卡ID',   r.serviceCardId],
       ['其他信息',   r.serviceCardOther],
     ]),
     groupRow('落地页', [
