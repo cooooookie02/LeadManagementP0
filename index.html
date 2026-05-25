@@ -2993,7 +2993,7 @@ function openDetail(uidOrName) {
         const qiweiLink = c.qiweiLink || (qiweiCard.status === '已添加'
           ? { name:'5月品牌活动获客链接', id:'qw_link_5523', channel:'channel_brand_05', opened:'已开口' }
           : null);
-        const service = c.service || (c.leadType === '服务卡'
+        const service = c.service || (c.leadType === '留资卡'
           ? { name:'肌肤检测预约卡', id:'svc_70021' } : null);
         const remark = c.remark || '';
         const region = c.region || (host.region) || '上海';
@@ -3064,11 +3064,11 @@ function openDetail(uidOrName) {
               ])
             : rowHTML('企微获客链接', dash),
           service
-            ? groupHTML('服务卡', [
-                ['服务卡名称', service.name],
-                ['服务卡ID', service.id],
+            ? groupHTML('留资卡', [
+                ['留资卡名称', service.name],
+                ['留资卡ID', service.id],
               ])
-            : rowHTML('服务卡', dash),
+            : rowHTML('留资卡', dash),
           rowHTML('备注', remark || dash),
           rowHTML('所属地域', region || dash),
         ].join('');
