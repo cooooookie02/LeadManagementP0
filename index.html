@@ -272,19 +272,19 @@
 
     <!-- 统计卡片 -->
     <div style="display:flex;gap:12px;margin-bottom:12px;">
-      <!-- 开口阶段 -->
+      <!-- 开口未留资 -->
       <div class="stat-card" id="card-0" onclick="filterByCard(0)">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
-          <span style="font-size:12px;color:#666;">进线阶段<span class="def-tip" data-tip="未开口，但已在表单等任意渠道发起过互动的客户">ⓘ</span></span>
+          <span style="font-size:12px;color:#666;">进线未开口<span class="def-tip" data-tip="未开口，但已在表单等任意渠道发起过互动的客户">ⓘ</span></span>
           <span class="stat-badge-green" id="card-badge-0">+12%</span>
         </div>
         <div style="font-size:28px;font-weight:800;color:#1a1a1a;line-height:1;" id="card-num-0">512</div>
         <div class="stat-delta-pos" style="margin-top:6px;" id="card-delta-0">较上周增长 58人</div>
       </div>
-      <!-- 开口阶段 -->
+      <!-- 开口未留资 -->
       <div class="stat-card" id="card-1" onclick="filterByCard(1)">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
-          <span style="font-size:12px;color:#666;">开口阶段<span class="def-tip" data-tip="未留资，但进线后已在私信中发起沟通的客户">ⓘ</span></span>
+          <span style="font-size:12px;color:#666;">开口未留资<span class="def-tip" data-tip="未留资，但进线后已在私信中发起沟通的客户">ⓘ</span></span>
           <span class="stat-badge-green" id="card-badge-1">+8%</span>
         </div>
         <div style="font-size:28px;font-weight:800;color:#1a1a1a;line-height:1;" id="card-num-1">128</div>
@@ -359,7 +359,7 @@
         <span class="filter-wrap">
           <select class="filter-select" id="fs-tag" onchange="onSelectFilterChange(this,renderList)">
             <option value="">客户标签     </option>
-            <option>进线阶段</option><option>开口阶段</option><option>潜客阶段</option><option>留资完成</option><option>转化完成</option>
+            <option>进线未开口</option><option>开口未留资</option><option>潜客阶段</option><option>留资完成</option><option>转化完成</option>
             <option>高意向未成交</option><option>KOS转介绍</option><option>已到店</option><option>VIP客户</option>
           </select>
           <span class="clear-x" onclick="clearSelectFilter('fs-tag',renderList)">×</span>
@@ -547,7 +547,7 @@
         <div style="font-size:12px;color:#555;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="笔记：小红书考研全程规划指南">笔记：小红书考研全程规划指南</div>
         <div><div style="display:flex;flex-wrap:wrap;gap:3px;align-items:center;"><span style="display:inline-flex;align-items:center;gap:3px;padding:2px 6px;border-radius:20px;background:#f3f4f6;border:1px solid #e5e7eb;white-space:nowrap;">
       <span style="width:5px;height:5px;border-radius:50%;background:#9ca3af;flex-shrink:0;"></span>
-      <span style="font-size:11px;color:#6b7280;">开口阶段</span>
+      <span style="font-size:11px;color:#6b7280;">开口未留资</span>
     </span><span style="display:inline-flex;align-items:center;gap:3px;padding:2px 6px;border-radius:20px;background:#f3f4f6;border:1px solid #e5e7eb;white-space:nowrap;">
       <span style="width:5px;height:5px;border-radius:50%;background:#9ca3af;flex-shrink:0;"></span>
       <span style="font-size:11px;color:#6b7280;">高潜成交</span>
@@ -646,7 +646,7 @@
         <div style="font-size:12px;color:#555;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="">—</div>
         <div><div style="display:flex;flex-wrap:wrap;gap:3px;align-items:center;"><span style="display:inline-flex;align-items:center;gap:3px;padding:2px 6px;border-radius:20px;background:#f3f4f6;border:1px solid #e5e7eb;white-space:nowrap;">
       <span style="width:5px;height:5px;border-radius:50%;background:#9ca3af;flex-shrink:0;"></span>
-      <span style="font-size:11px;color:#6b7280;">开口阶段</span>
+      <span style="font-size:11px;color:#6b7280;">开口未留资</span>
     </span></div></div>
         <div><button onclick="openConvertPicker(this,&#39;麦克善&#39;)" style="font-size:11px;color:#6b7280;background:#fff;border-color:#e5e7eb;border:1px solid;border-radius:6px;padding:2px 8px;cursor:pointer;">填写</button></div>
         <div style="font-size:12px;color:#555;">186****9999</div>
@@ -677,7 +677,7 @@
         <div style="font-size:12px;color:#555;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="直播间：暑期集训营招生专场">直播间：暑期集训营招生专场</div>
         <div><div style="display:flex;flex-wrap:wrap;gap:3px;align-items:center;"><span style="display:inline-flex;align-items:center;gap:3px;padding:2px 6px;border-radius:20px;background:#f3f4f6;border:1px solid #e5e7eb;white-space:nowrap;">
       <span style="width:5px;height:5px;border-radius:50%;background:#9ca3af;flex-shrink:0;"></span>
-      <span style="font-size:11px;color:#6b7280;">进线阶段</span>
+      <span style="font-size:11px;color:#6b7280;">进线未开口</span>
     </span></div></div>
         <div><button onclick="openConvertPicker(this,&#39;我看你像1012个人&#39;)" style="font-size:11px;color:#6b7280;background:#fff;border-color:#e5e7eb;border:1px solid;border-radius:6px;padding:2px 8px;cursor:pointer;">填写</button></div>
         <div style="font-size:12px;color:#555;">137****5555</div>
@@ -739,7 +739,7 @@
         <div style="font-size:12px;color:#555;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="">—</div>
         <div><div style="display:flex;flex-wrap:wrap;gap:3px;align-items:center;"><span style="display:inline-flex;align-items:center;gap:3px;padding:2px 6px;border-radius:20px;background:#f3f4f6;border:1px solid #e5e7eb;white-space:nowrap;">
       <span style="width:5px;height:5px;border-radius:50%;background:#9ca3af;flex-shrink:0;"></span>
-      <span style="font-size:11px;color:#6b7280;">进线阶段</span>
+      <span style="font-size:11px;color:#6b7280;">进线未开口</span>
     </span></div></div>
         <div><button onclick="openConvertPicker(this,&#39;灰白&#39;)" style="font-size:11px;color:#6b7280;background:#fff;border-color:#e5e7eb;border:1px solid;border-radius:6px;padding:2px 8px;cursor:pointer;">填写</button></div>
         <div style="font-size:12px;color:#555;">—</div>
@@ -971,14 +971,6 @@
       <div style="font-size:12px;color:#aaa;margin-top:2px;">可手动打标或设置自动规则</div>
     </div>
     <div style="padding:16px 18px;display:flex;flex-direction:column;gap:14px;">
-      <!-- 标签类型切换 -->
-      <div>
-        <label style="font-size:12px;font-weight:500;color:#555;display:block;margin-bottom:6px;">标签类型</label>
-        <div style="display:flex;gap:8px;" id="tagTypePicker">
-          <button id="tagTypeBtn-feature" onclick="selectTagType(&#39;feature&#39;)" style="flex:1;font-size:12px;padding:7px 0;border-radius:8px;border:2px solid #1a1a1a;background:#1a1a1a;color:#fff;cursor:pointer;">用户特征标签</button>
-          <button id="tagTypeBtn-stage" onclick="selectTagType(&#39;stage&#39;)" style="flex:1;font-size:12px;padding:7px 0;border-radius:8px;border:2px solid #e5e7eb;background:#fff;color:#555;cursor:pointer;">用户阶段标签</button>
-        </div>
-      </div>
       <div>
         <label style="font-size:12px;font-weight:500;color:#555;display:block;margin-bottom:5px;">标签名称 <span style="color:#ef4444;">*</span></label>
         <div style="position:relative;">
@@ -999,7 +991,7 @@
       </div>
       
       <!-- 自动规则 -->
-      <div id="autoRuleSection" style="border-top:1px solid #f0f0f0;padding-top:12px;display:none;">
+      <div id="autoRuleSection" style="border-top:1px solid #f0f0f0;padding-top:12px;display:block;">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
           <div>
             <div style="font-size:12px;font-weight:500;color:#1a1a1a;">自动规则</div>
@@ -1058,8 +1050,8 @@ const SYS_TAGS = [
   { id:'s6', name:'转化完成',  color:'yellow', isSystem:true,  showCard:true,  count:67,  delta:'-5%',  tip:'留资后有预约、进店、付费记录的客户',       priority:6, tagType:'stage' },
   { id:'s4', name:'留资完成',  color:'purple', isSystem:true,  showCard:true,  count:214, delta:'+5%',  tip:'已完成留资行为，包含过在私信中发送联系方式、企微唤端等', priority:5, tagType:'stage' },
   { id:'s3', name:'潜客阶段',  color:'blue',   isSystem:true,  showCard:true,  count:342, delta:'+8%',  tip:'未进线，但关注您或在您笔记下评论的客户', priority:4, tagType:'stage' },
-  { id:'s2', name:'开口阶段',  color:'green',  isSystem:true,  showCard:true,  count:128, delta:'+12%', tip:'未留资，但进线后已在私信中发起沟通的客户', priority:3, tagType:'stage' },
-  { id:'s1', name:'进线阶段',  color:'green',  isSystem:true,  showCard:false, count:856, delta:'+9%',  tip:'未开口，但已在表单等任意渠道发起过互动的客户', priority:2, tagType:'stage' },
+  { id:'s2', name:'开口未留资',  color:'green',  isSystem:true,  showCard:true,  count:128, delta:'+12%', tip:'未留资，但进线后已在私信中发起沟通的客户', priority:3, tagType:'stage' },
+  { id:'s1', name:'进线未开口',  color:'green',  isSystem:true,  showCard:false, count:856, delta:'+9%',  tip:'未开口，但已在表单等任意渠道发起过互动的客户', priority:2, tagType:'stage' },
   { id:'sf1', name:'高潜成交', color:'red',  isSystem:true, tagType:'feature', showCard:false, count:89,  delta:'+11%' },
   { id:'sf2', name:'无意向',   color:'gray', isSystem:true, tagType:'feature', showCard:false, count:134, delta:'+2%'  },
 ];
@@ -1204,13 +1196,13 @@ function addNewCustTag(uid) {
 }
 
 const customers = [
-  { name:'小红书69FB24AC',  phone:'125****1012', uid:'69fb07df000000002001002', account:'薯店-小红书', interactTypes:['评论','关注'], interactTime:'2026-05-06 17:18', enterTime:'2026-05-06 17:20', openTime:'2026-05-06 18:05', leadTime:'2026-05-06 18:12', tag:'开口阶段', tagColor:'green', wx:'wxid_abc', leadType:'私信留资', trafficType:'广告流量', leadSource:'笔记：小红书考研全程规划指南', convert:'', leads:3, remark:'对价格很感兴趣，周五回访', featureTags:['高潜成交'] },
+  { name:'小红书69FB24AC',  phone:'125****1012', uid:'69fb07df000000002001002', account:'薯店-小红书', interactTypes:['评论','关注'], interactTime:'2026-05-06 17:18', enterTime:'2026-05-06 17:20', openTime:'2026-05-06 18:05', leadTime:'2026-05-06 18:12', tag:'开口未留资', tagColor:'green', wx:'wxid_abc', leadType:'私信留资', trafficType:'广告流量', leadSource:'笔记：小红书考研全程规划指南', convert:'', leads:3, remark:'对价格很感兴趣，周五回访', featureTags:['高潜成交'] },
   { name:'小红书671C9221',  phone:'138****8888', uid:'671b4d0800000000...', account:'薯店-小红书', interactTypes:['关注'], interactTime:'2026-05-07 12:15', enterTime:'2026-05-07 12:29', openTime:'—', leadTime:'—', tag:'潜客阶段', tagColor:'blue', wx:'—', leadType:'客服打标', trafficType:'自然流量', leadSource:'', convert:'', leads:1, remark:'', featureTags:[] },
   { name:'绿索在夜理',      phone:'139****6666', uid:'5f10672b000000010101c362', account:'薯店-广告', interactTypes:['评论'], interactTime:'2026-05-06 16:52', enterTime:'2026-05-06 17:00', openTime:'2026-05-06 17:30', leadTime:'2026-05-06 17:45', tag:'留资完成', tagColor:'purple', wx:'green_night', leadType:'落地页', trafficType:'广告流量', leadSource:'直播间：5月冲刺班限时报名直播', convert:'', leads:2, remark:'已发方案，等待回复', featureTags:['高潜成交'] },
-  { name:'麦克善',          phone:'186****9999', uid:'667d3273000000001b018c69', account:'薯店-小红书', interactTypes:[], interactTime:'', enterTime:'2026-05-01 08:37', openTime:'2026-05-01 09:00', leadTime:'—', tag:'开口阶段', tagColor:'green', wx:'—', leadType:'私信留资', trafficType:'自然流量', leadSource:'', convert:'', leads:1, remark:'', featureTags:[] },
-  { name:'我看你像1012个人', phone:'137****5555', uid:'664fd9e0000000...', account:'薯店-广告', interactTypes:['评论','关注'], interactTime:'2026-05-07 11:30', enterTime:'2026-05-07 11:45', openTime:'—', leadTime:'—', tag:'进线阶段', tagColor:'green', wx:'—', leadType:'—', trafficType:'广告流量', leadSource:'直播间：暑期集训营招生专场', convert:'', leads:0, remark:'', featureTags:[] },
+  { name:'麦克善',          phone:'186****9999', uid:'667d3273000000001b018c69', account:'薯店-小红书', interactTypes:[], interactTime:'', enterTime:'2026-05-01 08:37', openTime:'2026-05-01 09:00', leadTime:'—', tag:'开口未留资', tagColor:'green', wx:'—', leadType:'私信留资', trafficType:'自然流量', leadSource:'', convert:'', leads:1, remark:'', featureTags:[] },
+  { name:'我看你像1012个人', phone:'137****5555', uid:'664fd9e0000000...', account:'薯店-广告', interactTypes:['评论','关注'], interactTime:'2026-05-07 11:30', enterTime:'2026-05-07 11:45', openTime:'—', leadTime:'—', tag:'进线未开口', tagColor:'green', wx:'—', leadType:'—', trafficType:'广告流量', leadSource:'直播间：暑期集训营招生专场', convert:'', leads:0, remark:'', featureTags:[] },
   { name:'小红书671BBF8F',  phone:'—',          uid:'671b499900000000e00b577', account:'薯店-小红书', interactTypes:['评论'], interactTime:'2026-05-07 10:58', enterTime:'2026-05-07 11:06', openTime:'2026-05-07 11:20', leadTime:'2026-05-07 11:35', tag:'潜客阶段', tagColor:'blue', wx:'wxid_xdf', leadType:'留资卡', trafficType:'自然流量', leadSource:'', convert:'', leads:4, remark:'', featureTags:[] },
-  { name:'灰白',            phone:'—',          uid:'5f8fdd9e0000000...', account:'薯店-小红书', interactTypes:[], interactTime:'', enterTime:'2026-05-03 01:17', openTime:'2026-05-03 01:40', leadTime:'—', tag:'进线阶段', tagColor:'green', wx:'—', leadType:'私信留资', trafficType:'自然流量', leadSource:'', convert:'', leads:1, remark:'', featureTags:[] },
+  { name:'灰白',            phone:'—',          uid:'5f8fdd9e0000000...', account:'薯店-小红书', interactTypes:[], interactTime:'', enterTime:'2026-05-03 01:17', openTime:'2026-05-03 01:40', leadTime:'—', tag:'进线未开口', tagColor:'green', wx:'—', leadType:'私信留资', trafficType:'自然流量', leadSource:'', convert:'', leads:1, remark:'', featureTags:[] },
   { name:'小红书671AA2F1',  phone:'131****7788', uid:'671aa2f1000000...', account:'薯店-广告', interactTypes:['关注'], interactTime:'2026-05-08 09:03', enterTime:'2026-05-08 09:12', openTime:'2026-05-08 09:30', leadTime:'2026-05-08 09:55', tag:'转化完成', tagColor:'orange', wx:'wxid_conv1', leadType:'落地页', trafficType:'广告流量', leadSource:'直播间：名师公开课免费试听专场', convert:'预约', leads:5, remark:'5月16日到店', featureTags:[] },
   { name:'陈小姐',          phone:'150****3344', uid:'cc1234560000000...', account:'薯店-小红书', interactTypes:['评论','关注'], interactTime:'2026-05-07 13:44', enterTime:'2026-05-07 14:00', openTime:'2026-05-07 14:22', leadTime:'2026-05-07 14:30', tag:'留资完成', tagColor:'purple', wx:'chen_lady', leadType:'企微名片', trafficType:'自然流量', leadSource:'', convert:'', leads:2, remark:'', featureTags:['高意向未成交'] },
 ];
@@ -1253,7 +1245,7 @@ function renderList() {
   let list = emptyConvertFilter
     ? customers.filter(c => !c.convert)
     : activeCard !== null
-      ? customers.filter(c => c.tag === ['进线阶段','开口阶段','潜客阶段','留资完成'][activeCard])
+      ? customers.filter(c => c.tag === ['进线未开口','开口未留资','潜客阶段','留资完成'][activeCard])
       : customers;
 
   if (_fInteract)   list = list.filter(c => (c.interactTypes||[]).includes(_fInteract));
@@ -1326,7 +1318,7 @@ function filterByCard(idx) {
   } else {
     activeCard = idx;
     cards.forEach((c,i)=>c.classList.toggle('active',i===idx));
-    const labels = ['进线阶段','开口阶段','潜客阶段','留资完成'];
+    const labels = ['进线未开口','开口未留资','潜客阶段','留资完成'];
     document.getElementById('cardFilterLabel').textContent = labels[idx];
     _setResetHighlight(true);
   }
@@ -2265,20 +2257,11 @@ function toggleBChip(el){
 }
 
 // ===== 新建标签 =====
+// 新建的标签统一为"用户特征标签"（系统已不再支持新建用户阶段标签）
 let _selectedTagType = 'feature';
 function selectTagType(type) {
-  _selectedTagType = type;
-  ['feature','stage'].forEach(t=>{
-    const btn = document.getElementById('tagTypeBtn-'+t);
-    if(!btn) return;
-    const active = t===type;
-    btn.style.background = active?'#1a1a1a':'#fff';
-    btn.style.color = active?'#fff':'#555';
-    btn.style.borderColor = active?'#1a1a1a':'#e5e7eb';
-  });
-  // 自动规则区块只在 stage 时显示
-  const ruleSection = document.getElementById('autoRuleSection');
-  if(ruleSection) ruleSection.style.display = type==='stage' ? 'block' : 'none';
+  // 兼容旧调用：始终保持 feature
+  _selectedTagType = 'feature';
 }
 function openCreateTag() {
   document.getElementById('createTagModal').style.display='flex';
@@ -2286,7 +2269,10 @@ function openCreateTag() {
   document.getElementById('newTagLen').textContent='0/10';
   selectedTagColor='green';
   document.querySelectorAll('#tagColorPicker .cdot').forEach(d=>d.classList.toggle('sel',d.dataset.c==='green'));
-  selectTagType('feature');
+  _selectedTagType = 'feature';
+  // 自动规则区块默认展示（特征标签也可设置自动规则）
+  const ruleSection = document.getElementById('autoRuleSection');
+  if(ruleSection) ruleSection.style.display = 'block';
   document.getElementById('autoRuleToggle').checked = false;
   toggleAutoRule(false);
 }
@@ -2317,8 +2303,8 @@ const AI_ANSWERS = {
   '流失风险名单有哪些客户？': '当前有 **23 位客户**存在流失风险（7 天未互动）：\n• 绿索在夜理（最后互动 2026-05-06）\n• 我看你像1012个人（最后互动 2026-05-07）\n• 灰白（最后互动 2026-05-03）\n…及其他 20 位。建议开启自动唤醒话术，可挽回约 35% 的流失客户。',
   '查看23位流失风险客户名单': '以下是当前 **23 位流失风险客户**（7 天未互动，按最后互动时间排序）：\n\n① 灰白 — 14天未互动（最高风险）\n② 绿索在夜理 — 9天未互动\n③ 我看你像1012个人 — 8天未互动\n…等 20 位。\n\n建议立即触发「流失唤醒」Skill，发送专属召回话术，历史挽回率约 **35%**。',
   '本周转化机会客户有哪些？': '本周预计 **18 位客户**可能成交，以下 3 位优先级最高：\n• 小红书69FB24AC — 互动 12 次，已私信，高意向\n• 麦克善 — KOS推荐来源，互动 8 次，关注中\n• 小红书671C9221 — 评论互动活跃\n\n建议本周内发起定制化成交邀约话术。',
-  '这里的数据口径是怎么定义的？': '以下是客户管理页面核心指标的口径说明：\n\n• **进线阶段** — 通过私信/评论/表单等任意渠道发起过互动的用户，T+1 更新\n• **潜客阶段** — 进线后有明确意向信号（多次互动/主动询价），但未成交\n• **流失客户** — 超过 7 天无互动且未转化的客户\n• **转化完成** — 已填写转化结果（预约/试听/成交）的客户\n• **最新进线时间** — 该客户最近一次从任意渠道进线的时间\n• **最近开口时间** — 客户最近一次主动发起私信的时间\n• **最近留资时间** — 客户最近一次提交表单/留下联系方式的时间\n\n如需查询其他字段口径，请直接提问 😊',
-  '如何提升私信跟进率？': '当前私信跟进率 **34%**，低于行业均值（约 60%）。主要原因：\n\n① 新进线阶段 24 小时内未跟进 — 占未跟进量 **52%**\n② 工作时间外进线无人响应 — 占 **31%**\n③ 客户主动评论未转私信 — 占 **17%**\n\n建议：\n• 开启「私信自动回复」缩短响应时间\n• 设置进线阶段 24 小时内提醒\n• 对评论客户批量发起私信邀约',
+  '这里的数据口径是怎么定义的？': '以下是客户管理页面核心指标的口径说明：\n\n• **进线未开口** — 通过私信/评论/表单等任意渠道发起过互动的用户，T+1 更新\n• **潜客阶段** — 进线后有明确意向信号（多次互动/主动询价），但未成交\n• **流失客户** — 超过 7 天无互动且未转化的客户\n• **转化完成** — 已填写转化结果（预约/试听/成交）的客户\n• **最新进线时间** — 该客户最近一次从任意渠道进线的时间\n• **最近开口时间** — 客户最近一次主动发起私信的时间\n• **最近留资时间** — 客户最近一次提交表单/留下联系方式的时间\n\n如需查询其他字段口径，请直接提问 😊',
+  '如何提升私信跟进率？': '当前私信跟进率 **34%**，低于行业均值（约 60%）。主要原因：\n\n① 新进线 24 小时内未跟进 — 占未跟进量 **52%**\n② 工作时间外进线无人响应 — 占 **31%**\n③ 客户主动评论未转私信 — 占 **17%**\n\n建议：\n• 开启「私信自动回复」缩短响应时间\n• 设置新进线 24 小时内提醒\n• 对评论客户批量发起私信邀约',
 };
 
 function _openPanel(maskId,panelId) {
@@ -2608,8 +2594,6 @@ function openLeadsDetail(uid){
           <div style="font-size:15px;font-weight:700;color:#1a1a1a;">${c.name}</div>
           <div style="font-size:12px;color:#aaa;margin-top:2px;">共 ${c.leads} 次留资记录</div>
         </div>
-        <button onclick="document.getElementById('leadsDetailModal').remove();openDetail('${c.uid}')"
-          style="font-size:12px;padding:5px 14px;border-radius:7px;border:1px solid #e5e7eb;background:#fff;color:#555;cursor:pointer;white-space:nowrap;">查看详情</button>
       </div>
       <button onclick="document.getElementById('leadsDetailModal').remove()" style="color:#aaa;font-size:20px;line-height:1;background:none;border:none;cursor:pointer;flex-shrink:0;">×</button>
     </div>
@@ -2617,7 +2601,13 @@ function openLeadsDetail(uid){
       ${mockRecords.map((r,i)=>`
       <div style="padding:16px 0;${i<mockRecords.length-1?'border-bottom:1px solid #f5f5f5;':''}">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
-          <span style="font-size:13px;font-weight:600;color:#1a1a1a;">${r.type}</span>
+          <div style="display:flex;align-items:center;gap:10px;">
+            <span style="font-size:13px;font-weight:600;color:#1a1a1a;">${r.type}</span>
+            <span onclick="jumpToLeadFromCustomer('${c.uid}','${r.type}','${r.time}')"
+              style="font-size:12px;color:#1677ff;cursor:pointer;display:inline-flex;align-items:center;gap:2px;">查看详情
+              <svg style="width:11px;height:11px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/></svg>
+            </span>
+          </div>
           <span style="font-size:12px;color:#aaa;">${r.time}</span>
         </div>
         <div style="display:flex;gap:24px;flex-wrap:wrap;">
@@ -2635,6 +2625,26 @@ function openLeadsDetail(uid){
   </div>`;
   document.body.appendChild(modal);
   modal.addEventListener('click', ()=>modal.remove());
+}
+
+// 从客户视图留资记录弹窗跳转到线索视图：仅按"那一天"筛选
+function jumpToLeadFromCustomer(custUid, recordType, recordTime){
+  // 关闭当前弹窗
+  const modal = document.getElementById('leadsDetailModal');
+  if (modal) modal.remove();
+  // 切到线索视图
+  switchView('lead');
+  // 提取日期（recordTime 形如 "2026-05-06 18:12"）→ 设置生成时间起止为那一天
+  const day = (recordTime || '').slice(0, 10);
+  setTimeout(()=>{
+    const ds = document.getElementById('lv-date-s');
+    const de = document.getElementById('lv-date-e');
+    if (ds && day) ds.value = day;
+    if (de && day) de.value = day;
+    // 清空其它筛选项以避免空结果（保留视图原有筛选体验）
+    if (typeof renderLeadList === 'function') renderLeadList();
+    toast(day ? `已切换到线索视图，已筛选 ${day} 的线索` : '已切换到线索视图');
+  }, 60);
 }
 
 function goToFilter(){
@@ -3583,6 +3593,8 @@ function renderLeadList() {
   const creativeIdFilter = ((document.getElementById('combo-lv-creative')||{}).dataset||{}).value || '';
   const sourceMediaFilter = (document.getElementById('lv-source-media')||{}).value || '';
   const uidFilter = ((document.getElementById('lv-uid')||{}).value || '').trim().toLowerCase();
+  const dateStart = (document.getElementById('lv-date-s')||{}).value || '';
+  const dateEnd   = (document.getElementById('lv-date-e')||{}).value || '';
 
   let rows = LEAD_DATA.filter(r => {
     if (trafficFilter && r.trafficType !== trafficFilter) return false;
@@ -3593,6 +3605,11 @@ function renderLeadList() {
     if (creativeIdFilter && r.adCreativeId !== creativeIdFilter) return false;
     if (sourceMediaFilter === '笔记' && r.srcNote === '-') return false;
     if (sourceMediaFilter === '直播间' && r.srcLive === '-') return false;
+    if (dateStart || dateEnd) {
+      const day = (r.genTime || '').slice(0,10);
+      if (dateStart && day < dateStart) return false;
+      if (dateEnd && day > dateEnd) return false;
+    }
     return true;
   });
 
@@ -3694,9 +3711,8 @@ function openLeadDetail(uid) {
       ['姓名',     r.hostName],
       ['所属地域', r.hostRegion],
       ['标签',     r.hostTag],
+      ['备注',     r.remark],
     ]),
-    simpleRow('所属地区', r.region),
-    simpleRow('备注',     r.remark),
   ];
 
   document.getElementById('detailMask').style.display = 'block';
@@ -3719,6 +3735,61 @@ function openLeadDetail(uid) {
     </div>
   `;
 }
+
+// ===== 旧版切换入口（右下角悬浮 mini-link） =====
+function showLegacyConfirm(){
+  const exist = document.getElementById('legacyConfirmModal');
+  if(exist) exist.remove();
+  const m = document.createElement('div');
+  m.id = 'legacyConfirmModal';
+  m.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:9000;display:flex;align-items:center;justify-content:center;';
+  m.innerHTML = `
+    <div style="background:#fff;border-radius:14px;width:440px;box-shadow:0 16px 48px rgba(0,0,0,.18);overflow:hidden;" onclick="event.stopPropagation()">
+      <div style="padding:22px 24px 10px;display:flex;align-items:center;gap:10px;">
+        <div style="width:32px;height:32px;border-radius:50%;background:#fff7e6;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <svg style="width:18px;height:18px;color:#fa8c16;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01M5.07 19h13.86c1.54 0 2.5-1.67 1.73-3L13.73 4a2 2 0 00-3.46 0L3.34 16c-.77 1.33.19 3 1.73 3z"/></svg>
+        </div>
+        <div style="font-size:16px;font-weight:700;color:#1a1a1a;">确认切回旧版？</div>
+      </div>
+      <div style="padding:4px 24px 4px 66px;font-size:13px;color:#555;line-height:1.7;">
+        新版「线索管理」相比旧版有以下升级：
+        <ul style="margin:8px 0 4px;padding-left:18px;color:#666;">
+          <li>新增「客户视图」与「线索视图」双视角，便于不同场景下的客户跟进</li>
+          <li>新增客户标签管理与系统分层（进线未开口/开口未留资/潜客/留资完成）</li>
+          <li>支持按投放账号、归属账号、创意ID 进行筛选搜索</li>
+          <li>新增 AI 客户洞察与一键导出能力</li>
+        </ul>
+        切回旧版后，以上能力将不可使用，且后续维护将逐步停止。
+      </div>
+      <div style="padding:18px 24px 22px;display:flex;gap:10px;justify-content:flex-end;">
+        <button onclick="document.getElementById('legacyConfirmModal').remove()"
+          style="font-size:13px;padding:7px 18px;border-radius:8px;border:1px solid #e5e7eb;background:#fff;color:#555;cursor:pointer;">继续使用新版</button>
+        <button onclick="goLegacyVersion()"
+          style="font-size:13px;padding:7px 18px;border-radius:8px;border:none;background:#1a1a1a;color:#fff;cursor:pointer;">仍要切回旧版</button>
+      </div>
+    </div>`;
+  m.addEventListener('click', ()=>m.remove());
+  document.body.appendChild(m);
+}
+function goLegacyVersion(){
+  const m = document.getElementById('legacyConfirmModal');
+  if(m) m.remove();
+  toast('已为您切换到旧版（演示）');
+}
+(function mountLegacySwitch(){
+  if(document.getElementById('legacySwitchEntry')) return;
+  const a = document.createElement('div');
+  a.id = 'legacySwitchEntry';
+  a.title = '切换到旧版线索管理';
+  a.onclick = showLegacyConfirm;
+  a.style.cssText = 'position:fixed;right:16px;bottom:16px;z-index:500;font-size:11px;color:#9ca3af;background:rgba(255,255,255,.92);border:1px solid #e5e7eb;border-radius:14px;padding:5px 11px;box-shadow:0 2px 8px rgba(0,0,0,.06);cursor:pointer;display:inline-flex;align-items:center;gap:4px;backdrop-filter:saturate(180%) blur(8px);transition:color .15s,border-color .15s;';
+  a.onmouseover = function(){ a.style.color='#1a1a1a'; a.style.borderColor='#d1d5db'; };
+  a.onmouseout  = function(){ a.style.color='#9ca3af'; a.style.borderColor='#e5e7eb'; };
+  a.innerHTML = `
+    <svg style="width:11px;height:11px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h10a4 4 0 010 8h-3M3 10l4-4M3 10l4 4"/></svg>
+    返回旧版`;
+  document.body.appendChild(a);
+})();
 
 // ===== 初始化 =====
 renderList();
