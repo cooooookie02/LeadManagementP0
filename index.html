@@ -440,13 +440,7 @@
       <!-- 客户视图：更多筛选展开区 -->
       <div id="moreFilterRow" style="display:none;align-items:center;gap:8px;flex-wrap:wrap;padding-top:4px;">
         <span style="font-size:12px;color:#888;white-space:nowrap;">更多筛选：</span>
-        <span class="filter-wrap">
-          <select class="filter-select" id="mf-convert" onchange="onSelectFilterChange(this,renderList)">
-            <option value="">转化结果     </option>
-            <option>预约</option><option>成交</option><option>未填写</option>
-          </select>
-          <span class="clear-x" onclick="clearSelectFilter('mf-convert',renderList)">×</span>
-        </span>
+
         <span class="filter-wrap">
           <select class="filter-select" id="mf-account" onchange="onSelectFilterChange(this,renderList)">
             <option value="">归属账号     </option>
@@ -524,7 +518,7 @@
     <div id="customerView" style="background: rgb(255, 255, 255); border-radius: 0px 0px 10px 10px; overflow: hidden; margin-bottom: 12px; display: block;">
       <div style="overflow-x:auto;"><div style="min-width:2000px;">
       <div class="table-header" style="grid-template-columns:1.6fr 1.5fr 1fr 0.9fr 1.2fr 1.3fr 1.3fr 1.3fr 0.8fr 1.6fr 1fr 1.2fr 1.1fr 1.1fr 1.1fr 1.3fr 1.1fr;">
-        <div>用户昵称</div><div>用户ID</div><div>归属账号</div><div>互动类型</div><div>最新互动时间</div><div>最新进线时间</div><div>最近开口时间</div><div>最近留资时间</div><div>留资次数</div><div>线索来源</div><div>客户标签</div><div>转化结果</div><div>电话</div><div>微信</div><div>留资方式</div><div>备注</div><div>操作</div>
+        <div>用户昵称</div><div>用户ID</div><div>归属账号</div><div>互动类型</div><div>最新互动时间</div><div>最新进线时间</div><div>最近开口时间</div><div>最近留资时间</div><div>留资次数</div><div>线索来源</div><div>客户标签</div><div>电话</div><div>微信</div><div>留资方式</div><div>备注</div><div>操作</div>
       </div>
       <div id="custList"><div class="table-row" style="display:grid;grid-template-columns:36px 1.6fr 1.5fr 1fr 0.9fr 1.2fr 1.3fr 1.3fr 1.3fr 0.8fr 1.6fr 1fr 1.2fr 1.1fr 1.1fr 1.1fr 1.3fr 1.1fr;min-width:2000px;" id="row-69fb07df000000002001002">
         <div style="display:flex;align-items:center;justify-content:center;">
@@ -1264,7 +1258,7 @@ function renderList() {
       const convertLabel = c.convert || '填写';
       const convertStyle = c.convert ? 'color:#15803d;background:#f0fdf4;border-color:#bbf7d0;' : 'color:#6b7280;background:#fff;border-color:#e5e7eb;';
       const convertBtn = `<button onclick="openConvertPicker(this,'${c.name}')" style="font-size:11px;${convertStyle}border:1px solid;border-radius:6px;padding:2px 8px;cursor:pointer;">${convertLabel}</button>`;
-      return `<div class="table-row" style="display:grid;grid-template-columns:1.6fr 1.5fr 1fr 0.9fr 1.2fr 1.3fr 1.3fr 1.3fr 0.8fr 1.6fr 1fr 1.2fr 1.1fr 1.1fr 1.1fr 1.3fr 1.1fr;min-width:2000px;" id="row-${c.uid}">
+      return `<div class="table-row" style="display:grid;grid-template-columns:1.6fr 1.5fr 1fr 0.9fr 1.2fr 1.3fr 1.3fr 1.3fr 0.8fr 1.6fr 1fr 1.1fr 1.1fr 1.1fr 1.3fr 1.1fr;min-width:1900px;" id="row-${c.uid}">
         <div style="display:flex;align-items:center;min-width:0;">
           <div style="font-weight:500;font-size:12px;color:#1a1a1a;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;">${c.name}</div>
         </div>
@@ -1282,7 +1276,6 @@ function renderList() {
         </div>
         <div style="font-size:12px;color:#555;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="${c.leadSource||''}">${c.leadSource||'—'}</div>
         <div>${renderTagCell(c)}</div>
-        <div>${convertBtn}</div>
         <div style="font-size:12px;color:#555;">${c.phone}</div>
         <div style="font-size:12px;color:#555;">${c.wx||'—'}</div>
         <div style="font-size:12px;color:#555;">${c.leadType}</div>
@@ -2448,7 +2441,7 @@ function openExportPanel() {
             <span onclick="toggleAllExportFields()" style="color:#18a058;cursor:pointer;" id="exp-field-toggle">取消全选</span>
           </div>
           <div style="display:flex;flex-wrap:wrap;gap:6px;" id="exp-fields">
-            ${['用户昵称','用户ID','归属账号','互动类型','最新互动时间','最新进线时间','最近开口时间','最近留资时间','流量类型','线索来源','转化结果','电话','微信','留资方式','客户标签'].map(f=>`<div class="_exp-field-tag _exp-selected" data-field="${f}" onclick="toggleExportField(this)" style="font-size:12px;padding:4px 10px;border-radius:20px;border:1.5px solid #18a058;background:#fff;color:#18a058;cursor:pointer;">${f}</div>`).join('')}
+            ${['用户昵称','用户ID','归属账号','互动类型','最新互动时间','最新进线时间','最近开口时间','最近留资时间','流量类型','线索来源','电话','微信','留资方式','客户标签'].map(f=>`<div class="_exp-field-tag _exp-selected" data-field="${f}" onclick="toggleExportField(this)" style="font-size:12px;padding:4px 10px;border-radius:20px;border:1.5px solid #18a058;background:#fff;color:#18a058;cursor:pointer;">${f}</div>`).join('')}
           </div>
         </div>
       </div>
