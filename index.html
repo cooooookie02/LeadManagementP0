@@ -2009,15 +2009,19 @@ function renderTagMgr() {
 
   function renderTagRow(t) {
     const c = COLORS[t.color] || COLORS.gray;
-    const actions = t.isSystem
+    // 阶段系统标签：只显示“系统标签”无按鈕；特征系统标签（预设）和自定义标签均可编辑/删除
+    const editDeleteBtns = `
+      <button onclick="event.stopPropagation();editTag('${t.id}')" style="color:#d1d5db;cursor:pointer;display:flex;align-items:center;flex-shrink:0;margin-right:4px;" onmouseover="this.style.color='#6b7280'" onmouseout="this.style.color='#d1d5db'" title="编辑">
+        <svg style="width:13px;height:13px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+      </button>
+      <button onclick="event.stopPropagation();deleteTag('${t.id}')" style="color:#d1d5db;cursor:pointer;display:flex;align-items:center;flex-shrink:0;" onmouseover="this.style.color='#ef4444'" onmouseout="this.style.color='#d1d5db'" title="删除">
+        <svg style="width:13px;height:13px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+      </button>`;
+    const actions = (t.isSystem && t.tagType === 'stage')
       ? `<span style="font-size:11px;color:#aaa;flex-shrink:0;">系统标签</span>`
-      : `<span style="font-size:11px;color:#aaa;margin-right:6px;flex-shrink:0;">自定义</span>
-         <button onclick="event.stopPropagation();editTag('${t.id}')" style="color:#d1d5db;cursor:pointer;display:flex;align-items:center;flex-shrink:0;margin-right:4px;" onmouseover="this.style.color='#6b7280'" onmouseout="this.style.color='#d1d5db'" title="编辑">
-           <svg style="width:13px;height:13px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
-         </button>
-         <button onclick="event.stopPropagation();deleteTag('${t.id}')" style="color:#d1d5db;cursor:pointer;display:flex;align-items:center;flex-shrink:0;" onmouseover="this.style.color='#ef4444'" onmouseout="this.style.color='#d1d5db'" title="删除">
-           <svg style="width:13px;height:13px;" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
-         </button>`;
+      : (t.isSystem && t.tagType === 'feature')
+        ? `<span style="font-size:11px;color:#aaa;margin-right:6px;flex-shrink:0;">预设</span>${editDeleteBtns}`
+        : `<span style="font-size:11px;color:#aaa;margin-right:6px;flex-shrink:0;">自定义</span>${editDeleteBtns}`;
     return `<div data-tid="${t.id}"
       style="display:flex;align-items:center;padding:11px 0;border-bottom:1px solid #f5f5f5;gap:10px;transition:background .1s;"
       onmouseover="this.style.background='#f9fafb'" onmouseout="this.style.background=''">
@@ -2089,13 +2093,18 @@ function _onTagDragEnd(e) {
 }
 
 function deleteTag(id) {
-  customTags = customTags.filter(t => t.id !== id);
+  // 阶段系统标签不可删除
+  const sys = SYS_TAGS.find(t => t.id === id);
+  if (sys && sys.tagType === 'stage') { toast('系统标签不可删除'); return; }
+  if (sys) { SYS_TAGS.splice(SYS_TAGS.indexOf(sys), 1); }
+  else { customTags = customTags.filter(t => t.id !== id); }
   if (_tagOrder) _tagOrder = _tagOrder.filter(x => x !== id);
   renderTagMgr(); renderTagCardPanel(); toast('标签已删除');
 }
 function editTag(id) {
-  const t = customTags.find(x => x.id === id);
+  const t = allTags().find(x => x.id === id);
   if (!t) return;
+  if (t.isSystem && t.tagType === 'stage') { toast('系统标签不可编辑'); return; }
   const newName = prompt('修改标签名称：', t.name);
   if (!newName || !newName.trim()) return;
   const trimmed = newName.trim();
