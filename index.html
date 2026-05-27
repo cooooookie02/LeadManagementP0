@@ -2019,9 +2019,7 @@ function renderTagMgr() {
       </button>`;
     const actions = (t.isSystem && t.tagType === 'stage')
       ? `<span style="font-size:11px;color:#aaa;flex-shrink:0;">系统标签</span>`
-      : (t.isSystem && t.tagType === 'feature')
-        ? `<span style="font-size:11px;color:#aaa;margin-right:6px;flex-shrink:0;">预设</span>${editDeleteBtns}`
-        : `<span style="font-size:11px;color:#aaa;margin-right:6px;flex-shrink:0;">自定义</span>${editDeleteBtns}`;
+      : editDeleteBtns;
     return `<div data-tid="${t.id}"
       style="display:flex;align-items:center;padding:11px 0;border-bottom:1px solid #f5f5f5;gap:10px;transition:background .1s;"
       onmouseover="this.style.background='#f9fafb'" onmouseout="this.style.background=''">
