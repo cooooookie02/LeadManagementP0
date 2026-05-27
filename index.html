@@ -359,7 +359,7 @@
         <span class="filter-wrap">
           <select class="filter-select" id="fs-tag" onchange="onSelectFilterChange(this,renderList)">
             <option value="">客户标签     </option>
-            <option>进线未开口</option><option>开口未留资</option><option>潜客阶段</option><option>留资完成</option><option>转化完成</option>
+            <option>进线未开口</option><option>开口未留资</option><option>潜客阶段</option><option>留资完成</option>
             <option>跟进中</option><option>高潜成交</option><option>无意向</option><option>成单</option><option>VIP客户</option>
           </select>
           <span class="clear-x" onclick="clearSelectFilter('fs-tag',renderList)">×</span>
@@ -768,9 +768,9 @@
           <span onclick="openLeadsDetail(&#39;671aa2f1000000...&#39;)" style="color:#1a1a1a;cursor:pointer;font-weight:700;">5</span>
         </div>
         <div style="font-size:12px;color:#555;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;" title="直播间：名师公开课免费试听专场">直播间：名师公开课免费试听专场</div>
-        <div><div style="display:flex;flex-wrap:wrap;gap:3px;align-items:center;"><span style="display:inline-flex;align-items:center;gap:3px;padding:2px 6px;border-radius:20px;background:#f3f4f6;border:1px solid #e5e7eb;white-space:nowrap;">
-      <span style="width:5px;height:5px;border-radius:50%;background:#9ca3af;flex-shrink:0;"></span>
-      <span style="font-size:11px;color:#6b7280;">转化完成</span>
+        <div><div style="display:flex;flex-wrap:wrap;gap:3px;align-items:center;"><span style="display:inline-flex;align-items:center;gap:3px;padding:2px 6px;border-radius:20px;background:#ede9fe;border:1px solid #c4b5fd;white-space:nowrap;">
+      <span style="width:5px;height:5px;border-radius:50%;background:#7c3aed;flex-shrink:0;"></span>
+      <span style="font-size:11px;color:#6b7280;">留资完成</span>
     </span></div></div>
         <div><button onclick="openConvertPicker(this,&#39;小红书671AA2F1&#39;)" style="font-size:11px;color:#15803d;background:#f0fdf4;border-color:#bbf7d0;border:1px solid;border-radius:6px;padding:2px 8px;cursor:pointer;">预约</button></div>
         <div style="font-size:12px;color:#555;">131****7788</div>
@@ -1047,7 +1047,6 @@ const COLORS = {
 // 系统预设标签（priority 越大优先级越高，客户展示取最高优先级标签）
 // 优先级顺序：流失(1) < 进线(2) < 开口(3) < 潜在(4) < 留资(5) < 转化(6)
 const SYS_TAGS = [
-  { id:'s6', name:'转化完成',  color:'yellow', isSystem:true,  showCard:true,  count:67,  delta:'-5%',  tip:'留资后有预约、进店、付费记录的客户',       priority:6, tagType:'stage' },
   { id:'s4', name:'留资完成',  color:'purple', isSystem:true,  showCard:true,  count:214, delta:'+5%',  tip:'已完成留资行为，包含过在私信中发送联系方式、企微唤端、客服手动打标为“留资完成”等', priority:5, tagType:'stage' },
   { id:'s3', name:'潜客阶段',  color:'blue',   isSystem:true,  showCard:true,  count:342, delta:'+8%',  tip:'未进线，但关注您或在您笔记下评论的客户', priority:4, tagType:'stage' },
   { id:'s2', name:'开口未留资',  color:'green',  isSystem:true,  showCard:true,  count:128, delta:'+12%', tip:'未留资，但进线后已在私信中发起沟通的客户', priority:3, tagType:'stage' },
@@ -1202,7 +1201,7 @@ const customers = [
   { name:'我看你像1012个人', phone:'137****5555', uid:'664fd9e0000000...', account:'薯店-广告', interactTypes:['评论','关注'], interactTime:'2026-05-07 11:30', enterTime:'2026-05-07 11:45', openTime:'—', leadTime:'—', tag:'进线未开口', tagColor:'green', wx:'—', leadType:'—', trafficType:'广告流量', leadSource:'直播间：暑期集训营招生专场', convert:'', leads:0, remark:'', featureTags:[] },
   { name:'小红书671BBF8F',  phone:'—',          uid:'671b499900000000e00b577', account:'薯店-小红书', interactTypes:['评论'], interactTime:'2026-05-07 10:58', enterTime:'2026-05-07 11:06', openTime:'2026-05-07 11:20', leadTime:'2026-05-07 11:35', tag:'潜客阶段', tagColor:'blue', wx:'wxid_xdf', leadType:'留资卡', trafficType:'自然流量', leadSource:'', convert:'', leads:4, remark:'', featureTags:[] },
   { name:'灰白',            phone:'—',          uid:'5f8fdd9e0000000...', account:'薯店-小红书', interactTypes:[], interactTime:'', enterTime:'2026-05-03 01:17', openTime:'2026-05-03 01:40', leadTime:'—', tag:'进线未开口', tagColor:'green', wx:'—', leadType:'私信留资', trafficType:'自然流量', leadSource:'', convert:'', leads:1, remark:'', featureTags:[] },
-  { name:'小红书671AA2F1',  phone:'131****7788', uid:'671aa2f1000000...', account:'薯店-广告', interactTypes:['关注'], interactTime:'2026-05-08 09:03', enterTime:'2026-05-08 09:12', openTime:'2026-05-08 09:30', leadTime:'2026-05-08 09:55', tag:'转化完成', tagColor:'orange', wx:'wxid_conv1', leadType:'落地页', trafficType:'广告流量', leadSource:'直播间：名师公开课免费试听专场', convert:'预约', leads:5, remark:'5月16日到店', featureTags:[] },
+  { name:'小红书671AA2F1',  phone:'131****7788', uid:'671aa2f1000000...', account:'薯店-广告', interactTypes:['关注'], interactTime:'2026-05-08 09:03', enterTime:'2026-05-08 09:12', openTime:'2026-05-08 09:30', leadTime:'2026-05-08 09:55', tag:'留资完成', tagColor:'purple', wx:'wxid_conv1', leadType:'落地页', trafficType:'广告流量', leadSource:'直播间：名师公开课免费试听专场', convert:'预约', leads:5, remark:'5月16日到店', featureTags:[] },
   { name:'陈小姐',          phone:'150****3344', uid:'cc1234560000000...', account:'薯店-小红书', interactTypes:['评论','关注'], interactTime:'2026-05-07 13:44', enterTime:'2026-05-07 14:00', openTime:'2026-05-07 14:22', leadTime:'2026-05-07 14:30', tag:'留资完成', tagColor:'purple', wx:'chen_lady', leadType:'企微名片', trafficType:'自然流量', leadSource:'', convert:'', leads:2, remark:'', featureTags:[] },
 ];
 
